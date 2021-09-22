@@ -1,0 +1,9 @@
+**/.gradle/
+**/out/
+.idea
+build/
+**/build/
+*.iml
+*.swp
+docker-sources/
+local.settings.gradle.kts
