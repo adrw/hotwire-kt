@@ -13,5 +13,7 @@ Notably, the lack of WebSocket support in Armeria limits it being a complete bac
 * [Armeria](https://armeria.dev)
 * [Hotwire](https://hotwired.dev)
 * [kotlinx.html](https://kotlinlang.org/docs/typesafe-html-dsl.html)
+* [HTML to kotlinx.html IntelliJ Plugin](https://plugins.jetbrains.com/plugin/12205-html-to-kotlinx-html)
 * [delitescere/hotwire-samples](https://github.com/delitescere/hotwire-samples)
 * [Mustache.java](https://github.com/spullara/mustache.java)
+* [Tailwind CSS](https://tailwindcss.com/) 
