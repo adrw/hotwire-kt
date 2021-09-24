@@ -16,6 +16,46 @@ The one caveat is that for certain custom tags or attributes or somecases like B
 
 The overall workflow of copying HTML from UI frameworks like Tailwind CSS, refactoring into Turbo Frame components, and adding props data classes for component inputs, proved to have the best of the React workflows I was used to without all the bad complex abstractions of React, Redux, Webpack, CSS-in-JS, and other novelties of the modern JS front end stack.  
 
+```kotlin
+import xyz.adrw.hotwire.html.hotwire.turbo_frame
+import xyz.adrw.hotwire.html.infra.template
+import kotlinx.html.*
+
+data class TableProps(
+  val data: List<List<String>>,
+  val limit: Int? = null,
+  val query: String? = null,
+)
+
+val TableId = "table_frame"
+
+val Table = template<TableProps> { props ->
+  val header = props.data.first()
+  val dataRows = props.query?.let { query ->
+    props.data.drop(1).filter { row ->
+      row.any { it.contains(query) }
+    }
+  } ?: props.data.drop(1)
+  val truncated = dataRows.take(props.limit ?: 5)
+
+  turbo_frame(TableId) {
+    div("flex flex-col") {
+      div("-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8") {
+        div("py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8") {
+          div("shadow overflow-hidden border-b border-gray-200 sm:rounded-lg") {
+            table("min-w-full divide-y divide-gray-200") {
+              thead("bg-gray-50") {
+                tr {
+                  header.map {
+                    th(classes = "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider") {
+                      attributes["scope"] = "col"
+                      +it
+                    }
+                  }
+                    ...
+
+```
+
 ## Resources
 
 * [Armeria](https://armeria.dev)
