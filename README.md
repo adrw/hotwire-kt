@@ -56,6 +56,39 @@ val Table = template<TableProps> { props ->
 
 ```
 
+The request lifecycle of encoding inputs within the request path and using a when statement to choose which component to return with new props was simple and straightforward, a joy to write and use.
+
+```kotlin
+/**
+ * Endpoint that handles interactive UI from Hotwire Turbo Frame related clicks
+ * Configuration of which UI to return and input data (ie. from forms) is provided by query parameters
+ */
+class TurboServiceHtml {
+  private val logger = getLogger<TurboServiceHtml>()
+
+  @Get
+  @Produces("text/html")
+  fun get(params: QueryParams): String {
+    val screen = params[ScreenParam]
+    val currentValue = params[BooleanParam].toBoolean()
+    val searchQuery = params[SearchParam]
+    val limit = params[LimitParam]?.toIntOrNull()
+
+    return buildHtml {
+      Wrapper("") {
+        when (screen) {
+          NavbarMobileMenuId -> NavbarMobileMenu(NavbarMobileMenuProps(visible = !currentValue))
+          NavbarAvatarMenuId -> NavbarAvatarMenu(NavbarAvatarMenuProps(visible = !currentValue))
+          TableId -> Table(TableProps(carsData, limit, searchQuery))
+          TableWithQueryId -> TableWithQuery(TableWithQueryProps(carsData, limit, searchQuery))
+          else -> logger.error("GET [screen=$screen] not found")
+        }
+      }
+    }
+  }
+}
+```
+
 ## Resources
 
 * [Armeria](https://armeria.dev)
