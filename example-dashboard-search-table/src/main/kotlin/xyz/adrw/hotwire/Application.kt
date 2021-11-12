@@ -30,15 +30,6 @@ class Application {
       .annotatedService("/page", PageServiceHtml())
       .annotatedService("/turbo", TurboServiceHtml())
 
-      /**
-       * Static file service for Hotwire example
-       */
-      .serviceUnder(
-        "/app", FileService.of(
-        ClassLoader.getSystemClassLoader(), "/app/html"
-      )
-      )
-
     val server = serverBuilder.build()
 
     /**
