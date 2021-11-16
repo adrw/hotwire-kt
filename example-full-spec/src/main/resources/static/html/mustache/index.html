@@ -16,6 +16,7 @@
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script crossorigin="anonymous" src="https://unpkg.com/@hotwired/turbo@7.0.0-beta.3/dist/turbo.es5-umd.js"></script>
+    <script type="module" src="/static/js/hello_controller.js"></script>
 
     <link href="/app/stylesheets/main.css" rel="stylesheet"/>
 </head>
@@ -86,6 +87,19 @@
     <div>
         <p>System Load Average</p>
         <span id="load">waiting...</span>
+    </div>
+</section>
+
+<section>
+    <h1>Stimulus</h1>
+    <div data-controller="hello">
+        <input data-hello-target="name" type="text">
+
+        <button data-action="click->hello#greet">
+            Greet
+        </button>
+
+        <span data-hello-target="output"></span>
     </div>
 </section>
 

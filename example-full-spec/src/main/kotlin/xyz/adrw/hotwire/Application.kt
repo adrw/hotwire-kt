@@ -33,15 +33,15 @@ class Application {
       .annotatedService("/app/kotlinx/", KotlinxIndexServiceHtml())
       .annotatedService("/app/greeting/", GreetingServiceHtml())
       .annotatedService("/app/fragments/html-head",
-        HttpFile.of(Paths.get("/app/html/fragments/html-head.html"))
+        HttpFile.of(Paths.get("/static/html/fragments/html-head.html"))
       )
       .annotatedService("/app/pinger", PingerServiceHtml())
 
       /**
        * Static file service for Hotwire example
        */
-      .serviceUnder("/app", FileService.of(
-        ClassLoader.getSystemClassLoader(), "/app/html"
+      .serviceUnder("/static", FileService.of(
+        ClassLoader.getSystemClassLoader(), "/static"
       ))
 
     val server = serverBuilder.build()
