@@ -11,4 +11,4 @@ $ ./gradlew :example-full-spec:runShadow
 Then open in your browser:
 
 - [0.0.0.0:8080/app/kotlinx/](0.0.0.0:8080/app/kotlinx/): demo using `kotlinx.html` templates in Kotlin code
-- [0.0.0.0:8080/app/mustache/](0.0.0.0:8080/app/mustache/): demo using mustache template HTML files on disk
+- [0.0.0.0:8080/static/html/mustache/](0.0.0.0:8080/static/html/mustache/): demo using mustache template HTML files on disk

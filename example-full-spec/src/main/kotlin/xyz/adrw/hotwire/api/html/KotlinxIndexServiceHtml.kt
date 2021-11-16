@@ -2,13 +2,16 @@ package xyz.adrw.hotwire.api.html
 
 import com.linecorp.armeria.server.annotation.Get
 import com.linecorp.armeria.server.annotation.Produces
+import kotlinx.html.InputType
 import kotlinx.html.a
 import kotlinx.html.attributesMapOf
+import kotlinx.html.button
 import kotlinx.html.div
 import kotlinx.html.h1
 import kotlinx.html.h2
-import kotlinx.html.p
+import kotlinx.html.input
 import kotlinx.html.section
+import kotlinx.html.span
 import xyz.adrw.hotwire.html.components.Wrapper
 import xyz.adrw.hotwire.html.hotwire.turbo_frame
 import xyz.adrw.hotwire.html.infra.buildHtml
@@ -47,6 +50,21 @@ class KotlinxIndexServiceHtml {
           }
           div {
             a("/app/greeting/?person=Josh&sleep=true") { +"Click here to greet Josh (slow)" }
+          }
+        }
+        h1 { +"Stimulus" }
+        div {
+          attributes["data-controller"] = "hello"
+          input {
+            attributes["data-hello-target"] = "name"
+            type = InputType.text
+          }
+          button {
+            attributes["data-action"] = "click->hello#greet"
+            +"""Greet"""
+          }
+          span {
+            attributes["data-hello-target"] = "output"
           }
         }
       }

@@ -26,6 +26,10 @@ val Wrapper = layout<String> { title, template ->
       script {
         src = "https://unpkg.com/@hotwired/turbo@7.0.0-beta.3/dist/turbo.es5-umd.js"
       }
+      script {
+        type = "module"
+        src = "/static/js/hello_controller.js"
+      }
       title(title)
       script {
         type = "text/javascript"
