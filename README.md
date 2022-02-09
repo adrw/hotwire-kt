@@ -89,6 +89,18 @@ class TurboServiceHtml {
 }
 ```
 
+## Getting Started
+
+### Activate Hermit
+
+Before building the project, you need to activate the [Hermit](https://go.sqprod.co/hermit/)
+environment, unless you are using
+the [Hermit Shell Hooks](https://cashapp.github.io/hermit/docs/usage/shell/) or Hermit IntelliJ Plugin.
+
+```shell
+. ./bin/activate-hermit
+```
+
 ## Resources
 
 * [Armeria](https://armeria.dev)
