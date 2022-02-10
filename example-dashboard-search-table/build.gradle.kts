@@ -20,7 +20,7 @@ application {
 }
 
 dependencies {
-  implementation(project(":common"))
+  implementation(project(":ui"))
   implementation(project(":kotlinx-html-templates"))
 
   implementation(HotwireKtDependencies.mustacheCompiler)
