@@ -1,0 +1,4 @@
+web:
+  port: 8080
+  idle_timeout: 30000
+  http2: true

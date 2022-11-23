@@ -1,6 +1,6 @@
 # hotwire-kt 
 
-A collection of Kotlin examples using the Hotwire JS framework to build interactive web apps with a Kotlin Armeria server backend.
+A collection of Kotlin examples using the Hotwire JS framework to build interactive web apps with a Kotlin [Misk](https://github.com/cashapp/misk) or [Armeria](https://armeria.dev) server backend.
 
 Using Hotwire and `kotlinx.html` together has made building web apps fun again since I can build everything I want in sweet, sweet Kotlin. 
 
@@ -17,8 +17,8 @@ The one caveat is that for certain custom tags or attributes or somecases like B
 The overall workflow of copying HTML from UI frameworks like Tailwind CSS, refactoring into Turbo Frame components, and adding props data classes for component inputs, proved to have the best of the React workflows I was used to without all the bad complex abstractions of React, Redux, Webpack, CSS-in-JS, and other novelties of the modern JS front end stack.  
 
 ```kotlin
-import xyz.adrw.hotwire.html.hotwire.turbo_frame
-import xyz.adrw.hotwire.html.infra.template
+import xyz.adrw.hotwire.templates.turbo_frame
+import xyz.adrw.hotwire.templates.template
 import kotlinx.html.*
 
 data class TableProps(
@@ -103,6 +103,7 @@ the [Hermit Shell Hooks](https://cashapp.github.io/hermit/docs/usage/shell/) or 
 
 ## Resources
 
+* [Misk](https://github.com/cashapp/misk)
 * [Armeria](https://armeria.dev)
 * [Hotwire](https://hotwired.dev)
 * [kotlinx.html](https://kotlinlang.org/docs/typesafe-html-dsl.html)

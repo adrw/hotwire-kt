@@ -1,0 +1,15 @@
+insert:
+INSERT INTO billboards(
+  created_at,
+  updated_at,
+  token,
+  client_name,
+  location
+) VALUES (?, ?, ?, ?, ?);
+
+get:
+SELECT * FROM billboards WHERE token = ?;
+
+getAll:
+SELECT * FROM billboards;
+

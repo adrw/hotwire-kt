@@ -1,0 +1,28 @@
+-- Copied from misk-db-feature
+insert:
+INSERT INTO features(
+  created_at,
+  updated_at,
+  name,
+  metadata
+) VALUES (?, ?, ?, ?);
+
+update:
+UPDATE features
+SET
+  updated_at = ?,
+  metadata = ?
+WHERE name = ?;
+
+get:
+SELECT * FROM features WHERE name = ?;
+
+getAll:
+SELECT * FROM features
+ORDER BY name DESC;
+
+count:
+SELECT COUNT(*) FROM features;
+
+delete:
+DELETE FROM features WHERE name = ?;

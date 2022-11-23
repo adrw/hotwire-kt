@@ -1,0 +1,16 @@
+syntax = "proto3";
+package misk.db.protos.feature;
+
+option java_package = "misk.db.protos.feature";
+
+import "google/protobuf/timestamp.proto";
+
+message DeleteFeatureRequest {
+  /* Feature name to delete. */
+  string name = 1;
+}
+
+message DeleteFeatureResponse {
+  /* Deleted flag name. */
+  string deleted = 1;
+}

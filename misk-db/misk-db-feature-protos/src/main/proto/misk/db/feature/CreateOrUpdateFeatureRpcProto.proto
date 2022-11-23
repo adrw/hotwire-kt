@@ -1,0 +1,20 @@
+syntax = "proto3";
+package misk.db.protos.feature;
+
+option java_package = "misk.db.protos.feature";
+
+import "google/protobuf/timestamp.proto";
+import "misk/db/feature/FeatureProto.proto";
+import "misk/db/feature/FeatureConfigProto.proto";
+
+message CreateOrUpdateFeatureRequest {
+  /* Unique identifier for a Feature. */
+  string name = 1;
+  /* Config including evaluation rules for a Feature. */
+  misk.db.protos.feature.FeatureConfig config = 2;
+}
+
+message CreateOrUpdateFeatureResponse {
+  /* Updated Feature reflecting changed config passed in request. */
+  Feature updated_feature = 1;
+}

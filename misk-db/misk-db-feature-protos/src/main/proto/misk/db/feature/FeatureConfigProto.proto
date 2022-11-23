@@ -1,0 +1,27 @@
+syntax = "proto3";
+package misk.db.protos.feature;
+
+option java_package = "misk.db.protos.feature";
+
+message FeatureConfig {
+  /* Rules with their corresponding values for a feature flag. */
+  repeated FeatureRule rules = 1;
+}
+
+message FeatureRule {
+  /* Supports all the types in Misk.Feature using respective proto types. */
+  oneof feature_value {
+    bool value_boolean = 11;
+    double value_double = 12;
+    int32 value_int = 13;
+    string value_string = 14;
+    string value_json = 15;
+    string value_enum = 16;
+  }
+
+  /* Required for JSON and enums, filled as "${Type::class.java.name}".
+   * Primitives (bool, double...) are supported without this field being set. */
+  optional string type_java_class_name = 20;
+
+  // TODO Add conditions logic per rule, for now only support DynamicConfig
+}

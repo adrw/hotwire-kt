@@ -1,0 +1,20 @@
+syntax = "proto3";
+package misk.db.protos.feature;
+
+option java_package = "misk.db.protos.feature";
+
+import "google/protobuf/timestamp.proto";
+import "misk/db/feature/FeatureProto.proto";
+import "misk/db/feature/FeatureConfigProto.proto";
+
+message GetFeaturesRequest {
+  /* Search query string to filter and return documents, if empty returns latest files. */
+  optional string search_query = 1;
+}
+
+message GetFeaturesResponse {
+  /* Feature results that match the provided request search query. */
+  repeated Feature features = 1;
+  /* Total features count */
+  int64 total_features_count = 2;
+}
