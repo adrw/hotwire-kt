@@ -2,11 +2,34 @@
 
 A collection of Kotlin examples using the Hotwire JS framework to build interactive web apps with a Kotlin [Misk](https://github.com/cashapp/misk) or [Armeria](https://armeria.dev) server backend.
 
-Using Hotwire and `kotlinx.html` together has made building web apps fun again since I can build everything I want in sweet, sweet Kotlin. 
+Using Hotwire and `kotlinx.html` together has made building web apps fun again since I can build everything I want in sweet, sweet Kotlin.
 
-## Limitations
+## Getting Started
 
-Notably, the lack of WebSocket support in Armeria limits it being a complete backend for Hotwire JS. For example, Turbo Streams which require WebSockets do not currently work. Turbo Links and Turbo Frames work well. WebSocket support is being tracked [here](https://github.com/line/armeria/issues/1076) and hopefully will be added soon.
+See the links below to each example README.md for instructions on how to run each project locally and try it in your browser.
+
+## Examples
+
+- [flagpole](./misk-db/misk-db-feature-sample/README.md): Misk admin dashboard tab built with Hotwire, feature flags backed by a SqlDelight database
+- [dashboard-search-table](./armeria/dashboard-search-table/README.md): Armeria powered dashboard that searches a large JSON file
+- [full-spec](./armeria/full-spec/README.md): Armeria implementation of a Hotwire example elsewhere built in Spring that shows use of different Hotwire patterns (TurboFrames...etc)
+
+
+## Activate Hermit
+
+Before building any example project, you need to activate the [Hermit](https://go.sqprod.co/hermit/)
+environment, unless you are using
+the [Hermit Shell Hooks](https://cashapp.github.io/hermit/docs/usage/shell/) or Hermit IntelliJ Plugin.
+
+```shell
+. ./bin/activate-hermit
+```
+
+## Misk vs Armeria Limitations
+
+Misk supports WebSockets and in theory should be able to support all Hotwire patterns. The existing examples in the repo do not yet showcase TurboStreams but there is no reason why it should not work with Misk.
+
+Notably for Armeria, the lack of WebSocket support in Armeria limits it being a complete backend for Hotwire JS. For example, Turbo Streams which require WebSockets do not currently work. Turbo Links and Turbo Frames work well. WebSocket support is being tracked [here](https://github.com/line/armeria/issues/1076) and hopefully will be added soon.
 
 ## Workflow
 
@@ -59,6 +82,8 @@ val Table = template<TableProps> { props ->
 The request lifecycle of encoding inputs within the request path and using a when statement to choose which component to return with new props was simple and straightforward, a joy to write and use.
 
 ```kotlin
+// File: armeria/dashboard-search-table/src/main/kotlin/.../Pages.kt
+
 /**
  * Endpoint that handles interactive UI from Hotwire Turbo Frame related clicks
  * Configuration of which UI to return and input data (ie. from forms) is provided by query parameters
@@ -87,18 +112,6 @@ class TurboServiceHtml {
     }
   }
 }
-```
-
-## Getting Started
-
-### Activate Hermit
-
-Before building the project, you need to activate the [Hermit](https://go.sqprod.co/hermit/)
-environment, unless you are using
-the [Hermit Shell Hooks](https://cashapp.github.io/hermit/docs/usage/shell/) or Hermit IntelliJ Plugin.
-
-```shell
-. ./bin/activate-hermit
 ```
 
 ## Resources
