@@ -1,5 +1,5 @@
 //import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
-import { Application, Controller } from "../cache/stimulus.js"
+import { Application, Controller } from "../cache/stimulus.min.js"
 window.Stimulus = Application.start()
 
 Stimulus.register("misk-db-feature-search-form", class extends Controller {
