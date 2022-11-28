@@ -28,11 +28,17 @@ jobs:
       - uses: actions/checkout@v2
       - name: Hermit
         run: ./bin/hermit env -r >> $GITHUB_ENV
+      - name: Misk-Web Build
+        run: npm i -g @misk/cli@0.4.0 && miskweb ci-build -e
       - name: Gradle Check
-        uses: gradle/gradle-build-action@v2
+#        If retries are no longer needed, can stick with the simpler gradle action
+#        uses: gradle/gradle-build-action@v2
+        uses: nick-fields/retry@v2
         with:
-          arguments: check --stacktrace
-          gradle-executable: bin/gradle
+          max_attempts: 3
+          timeout_minutes: 30
+          retry_on: error
+          command: bin/gradle check --stacktrace
       - name: Publish Test Report
         if: ${{ always() }}
         uses: mikepenz/action-junit-report@v3
@@ -40,5 +46,3 @@ jobs:
           check_name: Test Report
           report_paths: '**/build/test-results/test/TEST-*.xml'
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: MiskWeb Build
-        run: npm i -g @misk/cli@0.4.0 && miskweb ci-build -e

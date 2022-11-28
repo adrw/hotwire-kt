@@ -18,11 +18,12 @@ import xyz.adrw.flagpole.persistence.FlagpolePersistenceModule
 
 class DbFeatureFlagsTestModule : KAbstractModule() {
   override fun configure() {
+    val deployment = TESTING
     val config: FlagpoleConfig = MiskConfig.load(
       appName = SERVICE_NAME,
-      deployment = TESTING
+      deployment = deployment
     )
-    install(DeploymentModule())
+    install(DeploymentModule(deployment))
     FlagpoleLogging.configure()
 
     install(ConfigModule.create(SERVICE_NAME, config))
@@ -30,12 +31,12 @@ class DbFeatureFlagsTestModule : KAbstractModule() {
     install(MiskWebModule(config.web))
     install(MiskTestingServiceModule())
 
+    install(JdbcTestingModule(FeatureDb::class))
+    install(JdbcTestingModule(FlagpoleDb::class))
     install(FlagpolePersistenceModule(config))
     install(FlagpoleAccessModule())
     install(FlagpoleWebActionsModule())
-    install(DbFeatureFlagsModule(TESTING.isLocalDevelopment))
-    install(JdbcTestingModule(FeatureDb::class))
-    install(JdbcTestingModule(FlagpoleDb::class))
+    install(DbFeatureFlagsModule(deployment.isLocalDevelopment))
   }
 
   companion object {
