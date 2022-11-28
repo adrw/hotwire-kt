@@ -23,8 +23,4 @@ High QPS services should probably use a 3rd-party API better suited for high sca
   )
   ```
 - Inject `misk.Feature("feature-name")` in business logic code where you want to evaluate the flag to control code flow.
-  - Before usage in deployed code, feature flag **must** be created with initial config using the gRPC FeatureService or admin dashboard.
-
-## TODO
-
-- [ ] Ignore sqldelight generated files, migrations...etc in the library JAR
+  - Before usage in deployed code, feature flag **must** be created with initial config using the gRPC FeatureService or admin dashboard. There is no default fall back and instead a hard failure if the flag does not exist when accessed in code.

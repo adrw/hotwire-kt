@@ -7,6 +7,7 @@ The service in this example is named `flagpole`. It includes feature flagged bus
 ## Getting Started
 
 ```bash
+$ npm i -g @misk/cli@0.4.0 && miskweb ci-build -e
 $ gradle :misk-db:misk-db-feature-sample:run 
 ```
 

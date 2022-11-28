@@ -50,10 +50,6 @@ const TabContainer = (props: IState & IDispatchProps) => {
           type={"module"}
           src={"/static/js/misk_db_feature_search_form_controller.js"}
         />
-        <script
-          type={"module"}
-          src={"/static/js/misk_db_feature_rule_form_type_select_controller.js"}
-        />
         <script type={"text/javascript"}>
           {`if (window["EventSource"] && window["Turbo"]) {
                Turbo.connectStreamSource(new EventSource("/load"));

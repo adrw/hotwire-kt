@@ -45,7 +45,7 @@ fun TagConsumer<*>.Wrapper(
       }
       script {
         src = if (useCache) {
-          "/static/cache/turbo.es5-umd.min.js"
+          "/static/cache/turbo.es5-umd.js"
         } else {
           "https://unpkg.com/@hotwired/turbo@7.0.0-beta.3/dist/turbo.es5-umd.js"
         }
