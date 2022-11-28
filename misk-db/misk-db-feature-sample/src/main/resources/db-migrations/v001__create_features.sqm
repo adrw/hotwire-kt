@@ -1,0 +1,14 @@
+-- Copied from misk-db-feature
+import java.time.Instant;
+import misk.db.feature.FeatureId;
+import misk.db.protos.feature.FeatureMetadata;
+
+CREATE TABLE features (
+  `id` bigint AS FeatureId NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp AS Instant NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp AS Instant NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `name` varchar(255) NOT NULL,
+  `metadata` blob AS FeatureMetadata NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unq_name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;

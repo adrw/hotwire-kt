@@ -1,12 +1,35 @@
 # hotwire-kt 
 
-A collection of Kotlin examples using the Hotwire JS framework to build interactive web apps with a Kotlin Armeria server backend.
+A collection of Kotlin examples using the Hotwire JS framework to build interactive web apps with a Kotlin [Misk](https://github.com/cashapp/misk) or [Armeria](https://armeria.dev) server backend.
 
-Using Hotwire and `kotlinx.html` together has made building web apps fun again since I can build everything I want in sweet, sweet Kotlin. 
+Using Hotwire and `kotlinx.html` together has made building web apps fun again since I can build everything I want in sweet, sweet Kotlin.
 
-## Limitations
+## Getting Started
 
-Notably, the lack of WebSocket support in Armeria limits it being a complete backend for Hotwire JS. For example, Turbo Streams which require WebSockets do not currently work. Turbo Links and Turbo Frames work well. WebSocket support is being tracked [here](https://github.com/line/armeria/issues/1076) and hopefully will be added soon.
+See the links below to each example README.md for instructions on how to run each project locally and try it in your browser.
+
+## Examples
+
+- [flagpole](./misk-db/misk-db-feature-sample/README.md): Misk admin dashboard tab built with Hotwire, feature flags backed by a SqlDelight database
+- [dashboard-search-table](./armeria/dashboard-search-table/README.md): Armeria powered dashboard that searches a large JSON file
+- [full-spec](./armeria/full-spec/README.md): Armeria implementation of a Hotwire example elsewhere built in Spring that shows use of different Hotwire patterns (TurboFrames...etc)
+
+
+## Activate Hermit
+
+Before building any example project, you need to activate the [Hermit](https://go.sqprod.co/hermit/)
+environment, unless you are using
+the [Hermit Shell Hooks](https://cashapp.github.io/hermit/docs/usage/shell/) or Hermit IntelliJ Plugin.
+
+```shell
+. ./bin/activate-hermit
+```
+
+## Misk vs Armeria Limitations
+
+Misk supports WebSockets and in theory should be able to support all Hotwire patterns. The existing examples in the repo do not yet showcase TurboStreams but there is no reason why it should not work with Misk.
+
+Notably for Armeria, the lack of WebSocket support in Armeria limits it being a complete backend for Hotwire JS. For example, Turbo Streams which require WebSockets do not currently work. Turbo Links and Turbo Frames work well. WebSocket support is being tracked [here](https://github.com/line/armeria/issues/1076) and hopefully will be added soon.
 
 ## Workflow
 
@@ -17,8 +40,8 @@ The one caveat is that for certain custom tags or attributes or somecases like B
 The overall workflow of copying HTML from UI frameworks like Tailwind CSS, refactoring into Turbo Frame components, and adding props data classes for component inputs, proved to have the best of the React workflows I was used to without all the bad complex abstractions of React, Redux, Webpack, CSS-in-JS, and other novelties of the modern JS front end stack.  
 
 ```kotlin
-import xyz.adrw.hotwire.html.hotwire.turbo_frame
-import xyz.adrw.hotwire.html.infra.template
+import xyz.adrw.hotwire.templates.turbo_frame
+import xyz.adrw.hotwire.templates.template
 import kotlinx.html.*
 
 data class TableProps(
@@ -59,6 +82,8 @@ val Table = template<TableProps> { props ->
 The request lifecycle of encoding inputs within the request path and using a when statement to choose which component to return with new props was simple and straightforward, a joy to write and use.
 
 ```kotlin
+// File: armeria/dashboard-search-table/src/main/kotlin/.../Pages.kt
+
 /**
  * Endpoint that handles interactive UI from Hotwire Turbo Frame related clicks
  * Configuration of which UI to return and input data (ie. from forms) is provided by query parameters
@@ -89,20 +114,9 @@ class TurboServiceHtml {
 }
 ```
 
-## Getting Started
-
-### Activate Hermit
-
-Before building the project, you need to activate the [Hermit](https://go.sqprod.co/hermit/)
-environment, unless you are using
-the [Hermit Shell Hooks](https://cashapp.github.io/hermit/docs/usage/shell/) or Hermit IntelliJ Plugin.
-
-```shell
-. ./bin/activate-hermit
-```
-
 ## Resources
 
+* [Misk](https://github.com/cashapp/misk)
 * [Armeria](https://armeria.dev)
 * [Hotwire](https://hotwired.dev)
 * [kotlinx.html](https://kotlinlang.org/docs/typesafe-html-dsl.html)

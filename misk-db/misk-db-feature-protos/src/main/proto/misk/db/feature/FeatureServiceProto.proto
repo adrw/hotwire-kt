@@ -1,0 +1,14 @@
+syntax = "proto3";
+package misk.db.protos.feature;
+
+option java_package = "misk.db.protos.feature";
+
+import "misk/db/feature/CreateOrUpdateFeatureRpcProto.proto";
+import "misk/db/feature/DeleteFeatureRpcProto.proto";
+import "misk/db/feature/GetFeaturesRpcProto.proto";
+
+service FeatureService {
+  rpc CreateOrUpdateFeature(misk.db.protos.feature.CreateOrUpdateFeatureRequest) returns (misk.db.protos.feature.CreateOrUpdateFeatureResponse) {}
+  rpc DeleteFlag(misk.db.protos.feature.DeleteFeatureRequest) returns (misk.db.protos.feature.DeleteFeatureResponse) {}
+  rpc GetFeatures(misk.db.protos.feature.GetFeaturesRequest) returns (misk.db.protos.feature.GetFeaturesResponse) {}
+}
