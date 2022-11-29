@@ -7,4 +7,5 @@ plugins {
 
 dependencies {
   api(Dependencies.kotlinxHtml)
+  api(Dependencies.miskActions)
 }

@@ -95,25 +95,25 @@ class DbFeatureFlagsTest {
     flagpoleInternalApi.CreateBillboard(
       CreateBillboardRequest(
         client_name = "Apple LLC",
-        lcoation = "SF1",
+        location = "SF1",
       )
     )
     flagpoleInternalApi.CreateBillboard(
       CreateBillboardRequest(
         client_name = "Apple LLC",
-        lcoation = "SF2",
+        location = "SF2",
       )
     )
     flagpoleInternalApi.CreateBillboard(
       CreateBillboardRequest(
         client_name = "Google LLC",
-        lcoation = "SF1",
+        location = "SF1",
       )
     )
     flagpoleInternalApi.CreateBillboard(
       CreateBillboardRequest(
         client_name = "Google LLC",
-        lcoation = "SF3",
+        location = "SF3",
       )
     )
 
