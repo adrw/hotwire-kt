@@ -23,7 +23,7 @@ class CreateBillboardAction @Inject constructor(
       updated_at = clock.instant(),
       token = token,
       client_name = request.client_name,
-      location = request.lcoation,
+      location = request.location,
     )
     return CreateBillboardResponse(token)
   }
