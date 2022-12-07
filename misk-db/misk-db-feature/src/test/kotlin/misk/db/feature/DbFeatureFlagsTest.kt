@@ -14,6 +14,7 @@ import misk.feature.Feature
 import misk.feature.FeatureFlags
 import misk.testing.MiskTest
 import misk.testing.MiskTestModule
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import xyz.adrw.flagpole.api.FlagpoleInternalApi
 import xyz.adrw.flagpole.api.GetBillboardsAction.Companion.ENABLE_SEARCH_FEATURE
@@ -23,6 +24,7 @@ import javax.inject.Inject
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
+@Tag("misk-db")
 @MiskTest(startService = true)
 class DbFeatureFlagsTest {
   @MiskTestModule
