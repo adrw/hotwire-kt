@@ -11,8 +11,9 @@ update:
 UPDATE features
 SET
   updated_at = ?,
-  metadata = ?
-WHERE name = ?;
+  metadata = ?,
+  version = :version + 1
+WHERE name = :name AND version = :version;
 
 get:
 SELECT * FROM features WHERE name = ?;

@@ -1,7 +1,7 @@
 import hotwire_kt.Dependencies
 
 plugins {
-  id("com.squareup.sqldelight")
+  id("app.cash.sqldelight")
   id("com.squareup.wire")
   application
   id("com.github.johnrengelman.shadow")
@@ -48,12 +48,14 @@ wire {
 }
 
 sqldelight {
-  database("FlagpoleDatabase") {
-    dialect = "mysql"
-    packageName = "xyz.adrw.flagpole.db"
-    sourceFolders = listOf("sqldelight", "resources/db-migrations")
-    deriveSchemaFromMigrations = true
-    migrationOutputDirectory = file("$buildDir/resources/main/db-migrations")
+  databases {
+    create("FlagpoleDatabase") {
+      dialect(Dependencies.sqldelightMysqlDialect)
+      packageName.set("xyz.adrw.flagpole.db")
+      sourceFolders.set(listOf("sqldelight", "resources/db-migrations"))
+      deriveSchemaFromMigrations.set(true)
+      migrationOutputDirectory.set(file("$buildDir/resources/main/db-migrations"))
+    }
   }
 }
 

@@ -2,7 +2,7 @@ import hotwire_kt.Dependencies
 
 plugins {
   `java-library`
-  id("com.squareup.sqldelight")
+  id("app.cash.sqldelight")
   id("com.squareup.wire")
 }
 
@@ -66,11 +66,13 @@ wire {
 }
 
 sqldelight {
-  database("FeatureDatabase") {
-    packageName = "misk.db"
-    sourceFolders = listOf("sqldelight", "sqldelight-migrations")
-    deriveSchemaFromMigrations = true
-    dialect = "mysql"
+  databases {
+    create("FeatureDatabase") {
+      dialect(Dependencies.sqldelightMysqlDialect)
+      packageName.set("misk.db")
+      sourceFolders.set(listOf("sqldelight", "sqldelight-migrations"))
+      deriveSchemaFromMigrations.set(true)
+    }
   }
 }
 

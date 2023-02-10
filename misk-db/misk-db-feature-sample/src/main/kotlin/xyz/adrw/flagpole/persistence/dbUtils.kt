@@ -1,6 +1,6 @@
 package xyz.adrw.flagpole.persistence
 
-import com.squareup.sqldelight.ColumnAdapter
+import app.cash.sqldelight.ColumnAdapter
 import misk.db.feature.timestampInstantAdapter
 import xyz.adrw.flagpole.db.Billboards
 

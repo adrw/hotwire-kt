@@ -1,9 +1,9 @@
 package misk.db.feature
 
+import app.cash.sqldelight.Query
+import app.cash.sqldelight.driver.jdbc.JdbcDriver
 import com.google.inject.Provider
 import com.google.inject.Provides
-import com.squareup.moshi.Moshi
-import com.squareup.sqldelight.sqlite.driver.JdbcDriver
 import misk.ServiceModule
 import misk.db.FeatureDatabase
 import misk.db.FeatureQueries
@@ -95,6 +95,15 @@ class DbFeatureFlagsModule(
         val connection = dataSource.get().connection
         connection.autoCommit = true
         return connection
+      }
+
+      override fun notifyListeners(queryKeys: Array<String>) {
+      }
+
+      override fun removeListener(listener: Query.Listener, queryKeys: Array<String>) {
+      }
+
+      override fun addListener(listener: Query.Listener, queryKeys: Array<String>) {
       }
 
       override fun closeConnection(connection: Connection) {

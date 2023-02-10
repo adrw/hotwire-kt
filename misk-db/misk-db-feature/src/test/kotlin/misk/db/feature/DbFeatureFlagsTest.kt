@@ -1,11 +1,14 @@
 package misk.db.feature
 
+import app.cash.sqldelight.db.OptimisticLockException
 import misk.db.FeatureQueries
+import misk.db.Features
 import misk.db.feature.DbFeatureFlags.Companion.evaluate
 import misk.db.feature.web.InternalApi
 import misk.db.protos.feature.CreateOrUpdateFeatureRequest
 import misk.db.protos.feature.DeleteFeatureRequest
 import misk.db.protos.feature.FeatureConfig
+import misk.db.protos.feature.FeatureMetadata
 import misk.db.protos.feature.FeatureRule
 import misk.db.protos.feature.GetFeaturesRequest
 import misk.feature.Attributes
@@ -20,9 +23,13 @@ import xyz.adrw.flagpole.api.FlagpoleInternalApi
 import xyz.adrw.flagpole.api.GetBillboardsAction.Companion.ENABLE_SEARCH_FEATURE
 import xyz.adrw.protos.flagpole.CreateBillboardRequest
 import xyz.adrw.protos.flagpole.GetBillboardsRequest
+import java.time.Clock
 import javax.inject.Inject
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 @Tag("misk-db")
 @MiskTest(startService = true)
@@ -30,6 +37,7 @@ class DbFeatureFlagsTest {
   @MiskTestModule
   private val module = DbFeatureFlagsTestModule()
 
+  @Inject lateinit var clock: Clock
   @Inject lateinit var featureQueries: FeatureQueries
   @Inject internal lateinit var internalApi: InternalApi
   @Inject lateinit var flagpoleInternalApi: FlagpoleInternalApi
@@ -254,6 +262,53 @@ class DbFeatureFlagsTest {
     // Evaluate the list of rules in flag config
 
     // TODO evaluate multiple flags with keyed and attributes targets
+  }
+
+  @Test
+  fun `optimistic db locking`() {
+    // Confirm database is empty
+    assertEquals(0, featureQueries.count().executeAsOne())
+
+    // Create flag
+    val name = "optimistic-lock"
+    featureQueries.insert(
+      created_at = clock.instant(),
+      updated_at = clock.instant(),
+      name = name,
+      metadata = FeatureMetadata(config = FeatureConfig(rules = listOf(FeatureRule(value_boolean = true))))
+    )
+
+    // Get flag version
+    val flag1 = featureQueries.get(name).executeAsOneOrNull()
+    assertEquals(0, flag1?.version?.version)
+    assertTrue(flag1!!.metadata.config!!.rules.first().value_boolean!!)
+
+    // Update value
+    featureQueries.update(
+      updated_at = clock.instant(),
+      // Incremented version
+      version = Features.Version(0),
+      name = name,
+      metadata = FeatureMetadata(config = FeatureConfig(rules = listOf(FeatureRule(value_boolean = false))))
+    )
+    val flag2 = featureQueries.get(name).executeAsOneOrNull()
+    assertEquals(1, flag2?.version?.version)
+    assertFalse(flag2!!.metadata.config!!.rules.first().value_boolean!!)
+
+    // Attempt update at the same version, should fail
+    val exception = assertFailsWith<OptimisticLockException> {
+      featureQueries.update(
+        updated_at = clock.instant(),
+        // Incremented version
+        version = Features.Version(0),
+        name = name,
+        metadata = FeatureMetadata(config = FeatureConfig(rules = listOf(FeatureRule(value_boolean = true))))
+      )
+    }
+    assertEquals(
+      "UPDATE on features failed because optimistic lock version did not match",
+      exception.message
+    )
   }
 
   enum class TestEnum {

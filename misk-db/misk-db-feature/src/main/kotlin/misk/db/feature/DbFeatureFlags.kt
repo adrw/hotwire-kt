@@ -1,7 +1,6 @@
 package misk.db.feature
 
 import com.google.common.util.concurrent.AbstractIdleService
-import com.squareup.moshi.Moshi
 import misk.db.FeatureQueries
 import misk.db.protos.feature.FeatureConfig
 import misk.db.protos.feature.FeatureRule

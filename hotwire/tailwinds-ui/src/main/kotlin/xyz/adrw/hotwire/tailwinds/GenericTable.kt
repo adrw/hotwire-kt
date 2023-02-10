@@ -75,9 +75,15 @@ val Table = component<TableProps> { props ->
                           td("px-6 py-4 whitespace-nowrap font-medium") {
                             a(classes = "text-indigo-600 hover:text-indigo-900") {
                               href = cell.href
-                              attributes["data-turbo-preload"]=""
+                              if (cell.dataTurbo) {
+                                attributes["data-turbo-preload"]=""
+                              } else {
+                                attributes["data-turbo"] = "false"
+                              }
                               if (cell.isPageNavigation) {
                                 attributes["target"]="_top"
+                              } else if (cell.openInNewTab) {
+                                attributes["target"]="_blank"
                               }
                               +cell.label
                             }

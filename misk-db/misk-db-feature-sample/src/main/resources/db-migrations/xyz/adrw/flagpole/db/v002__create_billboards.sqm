@@ -3,8 +3,9 @@ import xyz.adrw.flagpole.persistence.BillboardId;
 
 CREATE TABLE billboards (
   `id` bigint AS BillboardId NOT NULL AUTO_INCREMENT,
-  `created_at` timestamp AS Instant NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp AS Instant NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` varchar(24) AS Instant NOT NULL,
+  `updated_at` varchar(24) AS Instant NOT NULL,
+  `version` integer AS LOCK NOT NULL DEFAULT 0,
   `token` varchar(255) NOT NULL,
   `client_name`  varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
