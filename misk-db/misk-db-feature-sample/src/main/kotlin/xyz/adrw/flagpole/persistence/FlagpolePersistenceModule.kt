@@ -1,13 +1,12 @@
 package xyz.adrw.flagpole.persistence
 
+import app.cash.sqldelight.Query
+import app.cash.sqldelight.driver.jdbc.JdbcDriver
 import com.google.inject.Provides
-import com.squareup.sqldelight.sqlite.driver.JdbcDriver
 import misk.db.feature.FeatureDb
-import misk.db.feature.featuresAdapter
 import misk.inject.KAbstractModule
 import misk.jdbc.JdbcModule
 import xyz.adrw.flagpole.FlagpoleConfig
-import xyz.adrw.flagpole.db.Features
 import xyz.adrw.flagpole.db.FlagpoleDatabase
 import java.sql.Connection
 import javax.inject.Provider
@@ -44,6 +43,15 @@ class FlagpolePersistenceModule(
         return connection
       }
 
+      override fun notifyListeners(queryKeys: Array<String>) {
+      }
+
+      override fun removeListener(listener: Query.Listener, queryKeys: Array<String>) {
+      }
+
+      override fun addListener(listener: Query.Listener, queryKeys: Array<String>) {
+      }
+
       override fun closeConnection(connection: Connection) {
         connection.close()
       }
@@ -51,14 +59,6 @@ class FlagpolePersistenceModule(
     return FlagpoleDatabase(
       driver = driver,
       billboardsAdapter = billboardsAdapter,
-      featuresAdapter = coerceToServiceAdapter(),
     )
   }
-
-  private fun coerceToServiceAdapter() = Features.Adapter(
-    idAdapter = featuresAdapter.idAdapter,
-    created_atAdapter = featuresAdapter.created_atAdapter,
-    updated_atAdapter = featuresAdapter.updated_atAdapter,
-    metadataAdapter = featuresAdapter.metadataAdapter,
-  )
 }

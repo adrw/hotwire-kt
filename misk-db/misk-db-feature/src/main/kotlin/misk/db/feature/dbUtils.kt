@@ -1,8 +1,10 @@
 package misk.db.feature
 
-import com.squareup.sqldelight.ColumnAdapter
+import app.cash.sqldelight.ColumnAdapter
+import app.cash.sqldelight.db.OptimisticLockException
 import misk.db.Features
 import misk.db.protos.feature.FeatureMetadata
+import wisp.logging.getLogger
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatterBuilder
@@ -46,3 +48,9 @@ val featuresAdapter = Features.Adapter(
 // TODO use more robust sanitzation library
 /** Escape and replace characters that could be used in SQL injection or other attacks */
 fun String.sanitize() = this.replace(";", "").replace("*", "")
+
+fun <T> retryOnOptimisticLockException(block: () -> T): T = try {
+  block()
+} catch (e: OptimisticLockException) {
+  block()
+}
