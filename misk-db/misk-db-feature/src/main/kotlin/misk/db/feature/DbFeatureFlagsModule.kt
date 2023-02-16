@@ -10,10 +10,13 @@ import misk.db.FeatureQueries
 import misk.db.feature.api.CreateOrUpdateFeatureAction
 import misk.db.feature.api.DeleteFeatureAction
 import misk.db.feature.api.GetFeaturesAction
+import misk.db.feature.web.actions.frames.CreateFormAction
+import misk.db.feature.web.actions.frames.CreateFormChooseFeatureTypeAction
+import misk.db.feature.web.actions.frames.CreateFormExpandFeatureTypeAction
+import misk.db.feature.web.actions.frames.FieldCreateValueBooleanAction
 import misk.db.feature.web.actions.pages.CreateAction
 import misk.db.feature.web.actions.pages.DetailsAction
 import misk.db.feature.web.actions.pages.IndexAction
-import misk.db.feature.web.actions.frames.TurboRenderAction
 import misk.feature.DynamicConfig
 import misk.feature.FeatureFlags
 import misk.feature.FeatureService
@@ -79,11 +82,17 @@ class DbFeatureFlagsModule(
     install(WebActionModule.create<GetFeaturesAction>())
     install(WebActionModule.create<DeleteFeatureAction>())
 
-    // Install admin dashboard tab and backing web actions
+    // Install admin dashboard tab backing web actions
+    // Pages
     install(WebActionModule.create<CreateAction>())
     install(WebActionModule.create<DetailsAction>())
     install(WebActionModule.create<IndexAction>())
-    install(WebActionModule.create<TurboRenderAction>())
+    // Frames
+    install(WebActionModule.create<CreateFormAction>())
+    install(WebActionModule.create<CreateFormChooseFeatureTypeAction>())
+    install(WebActionModule.create<CreateFormExpandFeatureTypeAction>())
+    install(WebActionModule.create<FieldCreateValueBooleanAction>())
+    // Admin dashboard tab
     multibind<DashboardTab>().toProvider(
       DashboardTabProvider<AdminDashboard, AdminDashboardAccess>(
         slug = "feature",

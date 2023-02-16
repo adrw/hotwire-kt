@@ -24,6 +24,8 @@ data class PathBuilder(
     if (public) append(TabPublicUrlBase) else append(TabPrivateUrlBase)
     if (normalizedPath?.isNotBlank() == true) {
       append("/$normalizedPath/")
+    } else if (!public && frame != null) {
+      append("/$frame/")
     }
 
     if (!this.contains("?") && this.last() != '&') append("?")
@@ -65,7 +67,7 @@ data class PathBuilder(
 
   companion object {
     const val TabPublicUrlBase = "/_admin/feature"
-    const val TabPrivateUrlBase = "/misk.db.feature.web"
+    const val TabPrivateUrlBase = "/ui/frame"
 
     const val FrameParam = "frame"
     const val BooleanParam = "boolean"

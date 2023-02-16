@@ -19,7 +19,6 @@ import misk.db.feature.web.PathBuilder
 import misk.db.feature.web.PathBuilder.Companion.CreateNameParam
 import misk.db.feature.web.PathBuilder.Companion.CreateValueParam
 import misk.db.feature.web.PathBuilder.Companion.TypeJavaClassNameParam
-import misk.db.feature.web.actions.frames.TurboRenderAction
 import misk.db.feature.web.details.DetailsPath
 import misk.db.feature.web.results.ResultsPath
 import misk.db.protos.feature.Feature
@@ -68,7 +67,6 @@ val SelectFeatureTypeHtml = component<CreateHtmlProps> { props ->
       isExpanded = isExpanded,
       onClickControllerId = "misk-db-feature-rule-form-select",
       toggleExpandUrl = PathBuilder(
-        path = TurboRenderAction.PATH,
         frame = CreateFormExpandFeatureTypeId,
         select_input_id = CreateFormExpandFeatureTypeId,
         select_input_is_expanded = !isExpanded,
@@ -79,7 +77,6 @@ val SelectFeatureTypeHtml = component<CreateHtmlProps> { props ->
       ).build(public = false),
       selectIndexUrl = { index ->
         PathBuilder(
-          path = TurboRenderAction.PATH,
           frame = CreateFormChooseFeatureTypeId,
           select_input_id = CreateFormExpandFeatureTypeId,
           select_input_is_expanded = false,
@@ -121,7 +118,6 @@ val CreateForm = component<CreateHtmlProps> { props ->
       val createNameValue = props.updatedFeature?.name ?: props.create_name
       form {
         action = PathBuilder(
-          path = TurboRenderAction.PATH,
           frame = CreateFormId,
           is_update = props.is_update,
           feature_type_index = featureType.ordinal,
@@ -224,12 +220,13 @@ val CreateForm = component<CreateHtmlProps> { props ->
             type = InputType.text
             name = CreateValueParam
             id = CreateValueParam
-            if (createValue == null) {
+            if (createValue.isNullOrBlank()) {
               placeholder = when (featureType) {
                 FeatureType.BOOLEAN -> "false"
                 FeatureType.DOUBLE -> "24.24"
                 FeatureType.INT -> "42"
                 FeatureType.STRING -> "Join today!"
+                // TODO add hints if createTypeJavaClassName is set but value is empty
                 FeatureType.ENUM -> "BLUE"
                 FeatureType.JSON -> """{"alpha":true,"bravo":false}"""
               }
