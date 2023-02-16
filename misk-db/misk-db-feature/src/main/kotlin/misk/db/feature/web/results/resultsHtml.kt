@@ -10,7 +10,7 @@ import kotlinx.html.input
 import kotlinx.html.label
 import misk.db.feature.web.PathBuilder
 import misk.db.feature.web.PathBuilder.Companion.SearchParam
-import misk.db.feature.web.actions.TurboRenderAction
+import misk.db.feature.web.actions.frames.TurboRenderAction
 import misk.db.feature.web.create.CreatePath
 import xyz.adrw.hotwire.tailwinds.Table
 import xyz.adrw.hotwire.tailwinds.TableProps
