@@ -19,7 +19,7 @@ import misk.db.feature.web.PathBuilder
 import misk.db.feature.web.PathBuilder.Companion.CreateNameParam
 import misk.db.feature.web.PathBuilder.Companion.CreateValueParam
 import misk.db.feature.web.PathBuilder.Companion.TypeJavaClassNameParam
-import misk.db.feature.web.actions.TurboRenderAction
+import misk.db.feature.web.actions.frames.TurboRenderAction
 import misk.db.feature.web.details.DetailsPath
 import misk.db.feature.web.results.ResultsPath
 import misk.db.protos.feature.Feature

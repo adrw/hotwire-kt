@@ -18,6 +18,7 @@ dependencies {
   implementation(Dependencies.miskService)
 
   // Database
+  implementation(Dependencies.miskJdbc)
   implementation(Dependencies.sqldelightJdbcDriver)
 
   // ui

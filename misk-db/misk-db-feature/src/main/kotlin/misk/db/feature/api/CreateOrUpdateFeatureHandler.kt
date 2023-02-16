@@ -1,6 +1,8 @@
 package misk.db.feature.api
 
 import misk.db.FeatureQueries
+import misk.db.Features
+import misk.db.feature.DbFeatureFlags
 import misk.db.feature.getFeatureClazz
 import misk.db.feature.retryOnOptimisticLockException
 import misk.db.feature.toCreateOrUpdateResponse
@@ -13,6 +15,7 @@ import javax.inject.Inject
 class CreateOrUpdateFeatureHandler @Inject constructor(
   private val clock: Clock,
   private val queries: FeatureQueries,
+  private val dbFeatureFlags: DbFeatureFlags,
 ) {
   fun handle(request: CreateOrUpdateFeatureRequest): CreateOrUpdateFeatureResponse {
     check(request.name.isNotBlank()) {
@@ -43,6 +46,7 @@ class CreateOrUpdateFeatureHandler @Inject constructor(
           metadata = FeatureMetadata(config = request.config),
         )
       }
+      dbFeatureFlags.memoryCacheInvalidate(request.name)
       queries.get(request.name).executeAsOne()
     }
     return readAfterWrite.toCreateOrUpdateResponse()

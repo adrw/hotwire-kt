@@ -8,6 +8,13 @@ import misk.db.feature.DbFeatureFlagsModule
 import misk.environment.DeploymentModule
 import misk.web.dashboard.AdminDashboardModule
 import wisp.deployment.DEVELOPMENT
+import xyz.adrw.flagpole.api.DebugGetFeaturesAction
+import xyz.adrw.flagpole.api.DebugGetFeaturesAction.Companion.BOOL_FEATURE
+import xyz.adrw.flagpole.api.DebugGetFeaturesAction.Companion.DOUBLE_FEATURE
+import xyz.adrw.flagpole.api.DebugGetFeaturesAction.Companion.ENUM_FEATURE
+import xyz.adrw.flagpole.api.DebugGetFeaturesAction.Companion.INT_FEATURE
+import xyz.adrw.flagpole.api.DebugGetFeaturesAction.Companion.JSON_FEATURE
+import xyz.adrw.flagpole.api.DebugGetFeaturesAction.Companion.STRING_FEATURE
 import xyz.adrw.flagpole.api.FlagpoleWebActionsModule
 import xyz.adrw.flagpole.persistence.FlagpolePersistenceModule
 
@@ -26,6 +33,17 @@ fun main(args: Array<String>) {
     ConfigModule.create(SERVICE_NAME, config),
     DeploymentModule(deployment),
     AdminDashboardModule(deployment.isLocalDevelopment),
-    DbFeatureFlagsModule(deployment.isLocalDevelopment),
+    DbFeatureFlagsModule(deployment.isLocalDevelopment).withDefaults {
+      default(BOOL_FEATURE, true)
+      default(DOUBLE_FEATURE, 24.48)
+      default(INT_FEATURE, 42)
+      default(STRING_FEATURE, "he that seeks, finds")
+      default(ENUM_FEATURE, DebugGetFeaturesAction.Companion.TestEnum.RED)
+      defaultJson(JSON_FEATURE, DebugGetFeaturesAction.Companion.TestJson(
+        alpha = "bloop",
+        bravo = 62,
+        charlie = true,
+      ))
+    },
   ).run(args)
 }
