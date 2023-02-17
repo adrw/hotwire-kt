@@ -19,12 +19,6 @@ const TabContainer = (props: IState & IDispatchProps) => {
       props.location.pathname &&
       `path=${props.location.pathname}`) ||
     ""
-  //   const pathSuffix =
-  //     (props.location &&
-  //       props.location.pathname &&
-  //       props.location.pathname.split("/") &&
-  //       `/${props.location.pathname.split("/").pop()}`) ||
-  //     ""
   const encoded = `${path}${query}${pathQueryEncoded}`
 
   return (
@@ -69,7 +63,7 @@ const TabContainer = (props: IState & IDispatchProps) => {
         <H1>Feature</H1>
         <div
           dangerouslySetInnerHTML={{
-            __html: `<turbo-frame id="tab-root" src="/ui/page${encoded}"></turbo-frame>`
+            __html: `<turbo-frame id="tab-root" src="/misk.db.feature/ui/page${encoded}"></turbo-frame>`
           }}
         />
       </div>

@@ -1,5 +1,6 @@
 package misk.db.feature.web.actions.pages
 
+import misk.db.feature.web.PathBuilder.Companion.UI_PAGE_BASE_URL
 import misk.web.Get
 import misk.web.QueryParam
 import misk.web.ResponseContentType
@@ -16,7 +17,7 @@ import javax.inject.Inject
 class CreateAction @Inject constructor(
   private val handler: CreateHandler
 ): WebAction {
-  @Get("/ui/page/_admin/feature/create/")
+  @Get("$UI_PAGE_BASE_URL/_admin/feature/create/")
   @ResponseContentType(MediaTypes.TEXT_HTML)
   @AdminDashboardAccess // set to dashboard access since this is UI layer
   fun get(

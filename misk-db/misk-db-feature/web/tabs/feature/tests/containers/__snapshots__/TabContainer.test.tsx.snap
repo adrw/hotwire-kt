@@ -12,7 +12,7 @@ exports[`TabContainer TabContainer can render with redux 1`] = `
       <div>
         <turbo-frame
           id="tab-root"
-          src="/ui/page?"
+          src="/misk.db.feature/ui/page?"
         />
       </div>
     </div>
