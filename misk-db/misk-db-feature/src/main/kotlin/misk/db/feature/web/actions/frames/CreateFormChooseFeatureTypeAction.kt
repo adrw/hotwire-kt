@@ -1,5 +1,6 @@
 package misk.db.feature.web.actions.frames
 
+import misk.db.feature.web.PathBuilder.Companion.UI_FRAME_BASE_URL
 import misk.db.feature.web.create.CreateFormChooseFeatureTypeId
 import misk.db.feature.web.create.CreateOrUpdateHandler
 import misk.web.Get
@@ -19,7 +20,7 @@ import javax.inject.Inject
 class CreateFormChooseFeatureTypeAction @Inject constructor(
   private val createOrUpdateHandler: CreateOrUpdateHandler
 ) : WebAction {
-  @Get("/ui/frame/$PATH/")
+  @Get("$UI_FRAME_BASE_URL/$PATH/")
   @ResponseContentType(MediaTypes.TEXT_HTML)
   @AdminDashboardAccess
   fun get(

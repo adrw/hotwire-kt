@@ -21,7 +21,7 @@ data class PathBuilder(
   ): String = StringBuilder().apply {
     val normalizedPath = path?.removePrefix("/")
 
-    if (public) append(TabPublicUrlBase) else append(TabPrivateUrlBase)
+    if (public) append(TAB_PATH_BASE_URL) else append(UI_FRAME_BASE_URL)
     if (normalizedPath?.isNotBlank() == true) {
       append("/$normalizedPath/")
     } else if (!public && frame != null) {
@@ -66,8 +66,9 @@ data class PathBuilder(
   }.toString().removeSuffix("?").removeSuffix("&")
 
   companion object {
-    const val TabPublicUrlBase = "/_admin/feature"
-    const val TabPrivateUrlBase = "/ui/frame"
+    const val TAB_PATH_BASE_URL = "/_admin/feature"
+    const val UI_PAGE_BASE_URL = "/misk.db.feature/ui/page"
+    const val UI_FRAME_BASE_URL = "/misk.db.feature/ui/frame"
 
     const val FrameParam = "frame"
     const val BooleanParam = "boolean"
