@@ -10,7 +10,6 @@ import kotlinx.html.input
 import kotlinx.html.label
 import misk.db.feature.web.PathBuilder
 import misk.db.feature.web.PathBuilder.Companion.SearchParam
-import misk.db.feature.web.actions.frames.TurboRenderAction
 import misk.db.feature.web.create.CreatePath
 import xyz.adrw.hotwire.tailwinds.Table
 import xyz.adrw.hotwire.tailwinds.TableProps
@@ -42,7 +41,7 @@ val FlagPageHtml = component<FlagPageHtmlProps> { props ->
 val FlagForm = component<FlagPageHtmlProps> { props ->
   div("mt-1 relative rounded-md shadow-sm") {
     form {
-      action = PathBuilder(path = TurboRenderAction.PATH, frame = ResultsFormId).build(public = false)
+      action = PathBuilder(frame = ResultsFormId).build(public = false)
       attributes["data-controller"] = "misk-db-feature-search-form"
       attributes["data-misk-db-feature-search-form-target"] = "form"
       // TODO see if this URL redirect is the right one, whether it can be softer?
