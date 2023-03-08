@@ -1,10 +1,10 @@
 package xyz.adrw.hotwire.tailwinds
 
+import kotlinx.html.TagConsumer
 import kotlinx.html.a
 import kotlinx.html.div
 import kotlinx.html.id
 import xyz.adrw.hotwire.templates.Link
-import xyz.adrw.hotwire.templates.component
 import xyz.adrw.hotwire.templates.turbo_frame
 
 data class NavbarMobileMenuProps(
@@ -19,7 +19,7 @@ data class NavbarMobileMenuProps(
 
 val NavbarMobileMenuId = "mobile_menu_frame"
 
-val NavbarMobileMenu = component<NavbarMobileMenuProps> { props ->
+fun TagConsumer<*>.NavbarMobileMenu(props: NavbarMobileMenuProps) {
   val visibleClass = if (props.visible) {
     "sm:hidden"
   } else {

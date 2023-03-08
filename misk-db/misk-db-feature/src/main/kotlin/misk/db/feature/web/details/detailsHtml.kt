@@ -1,5 +1,6 @@
 package misk.db.feature.web.details
 
+import kotlinx.html.TagConsumer
 import kotlinx.html.a
 import kotlinx.html.br
 import kotlinx.html.code
@@ -15,7 +16,6 @@ import misk.db.feature.web.create.CreatePath
 import misk.db.feature.web.results.ResultsPath
 import misk.db.protos.feature.Feature
 import xyz.adrw.hotwire.templates.TurboStreamAction
-import xyz.adrw.hotwire.templates.component
 import xyz.adrw.hotwire.templates.template
 import xyz.adrw.hotwire.templates.turbo_frame
 import xyz.adrw.hotwire.templates.turbo_stream
@@ -29,19 +29,19 @@ data class FlagDetailsHtmlProps(
   val feature: Feature?,
 )
 
-val FlagDetailsHtml = component<FlagDetailsHtmlProps> { props ->
+fun TagConsumer<*>.FlagDetailsHtml(props: FlagDetailsHtmlProps) {
   div {
     FlagResultsFrame(props)
   }
 }
 
-val FlagResultsFrame = component<FlagDetailsHtmlProps> { props ->
+fun TagConsumer<*>.FlagResultsFrame(props: FlagDetailsHtmlProps) {
   turbo_frame(props.resultsId) {
     FlagResults(props)
   }
 }
 
-val FlagDetailsStream = component<FlagDetailsHtmlProps> { props ->
+fun TagConsumer<*>.FlagDetailsStream(props: FlagDetailsHtmlProps) {
   turbo_stream(TurboStreamAction.REPLACE, props.resultsId) {
     template {
       div {
@@ -52,7 +52,7 @@ val FlagDetailsStream = component<FlagDetailsHtmlProps> { props ->
   }
 }
 
-val FlagResults = component<FlagDetailsHtmlProps> { props ->
+fun TagConsumer<*>.FlagResults(props: FlagDetailsHtmlProps) {
   div("mt-1 relative rounded-md shadow-sm") {
     a(classes = "block text-right") {
       href = PathBuilder(path = ResultsPath).build()

@@ -29,7 +29,7 @@ class TurboRenderHandler @Inject constructor(
     return buildHtml {
       Wrapper {
         when (frame) {
-          CreateFormId -> createOrUpdateHandler.submit()(CreateOrUpdateHandler.Props(
+          CreateFormId -> createOrUpdateHandler.submit(this, CreateOrUpdateHandler.Props(
             is_update = is_update?.toBooleanStrictOrNull() ?: false,
             select_input_id = select_input_id,
             select_input_is_expanded = select_input_is_expanded?.toBooleanStrictOrNull() ?: false,
@@ -38,7 +38,7 @@ class TurboRenderHandler @Inject constructor(
             create_value = create_value,
             type_java_class_name = type_java_class_name,
           ))
-          CreateFormChooseFeatureTypeId, CreateFormExpandFeatureTypeId, FieldCreateValueBoolean -> createOrUpdateHandler.get()(CreateOrUpdateHandler.Props(
+          CreateFormChooseFeatureTypeId, CreateFormExpandFeatureTypeId, FieldCreateValueBoolean -> createOrUpdateHandler.get(this, CreateOrUpdateHandler.Props(
             is_update = is_update?.toBooleanStrictOrNull() ?: false,
             select_input_id = select_input_id,
             select_input_is_expanded = select_input_is_expanded?.toBooleanStrictOrNull() ?: false,

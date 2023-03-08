@@ -1,12 +1,12 @@
 package xyz.adrw.hotwire.tailwinds
 
 import kotlinx.html.InputType
+import kotlinx.html.TagConsumer
 import kotlinx.html.div
 import kotlinx.html.form
 import kotlinx.html.id
 import kotlinx.html.input
 import kotlinx.html.label
-import xyz.adrw.hotwire.templates.component
 import xyz.adrw.hotwire.templates.turbo_frame
 
 data class TableWithQueryProps(
@@ -40,7 +40,7 @@ data class TableWithQueryProps(
 
 val TableWithQueryId = "table_query_frame"
 
-val TableWithQuery = component<TableWithQueryProps> { props ->
+fun TagConsumer<*>.TableWithQuery(props: TableWithQueryProps) {
   turbo_frame(TableWithQueryId) {
     div {
       div("mt-1 relative rounded-md shadow-sm") {

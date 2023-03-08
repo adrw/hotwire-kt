@@ -1,5 +1,6 @@
 package misk.db.feature.web.create
 
+import kotlinx.html.TagConsumer
 import misk.db.feature.DbFeatureFlags.Companion.evaluateSerialized
 import misk.db.feature.FeatureType
 import misk.db.feature.getFeatureClazz
@@ -11,19 +12,18 @@ import misk.db.protos.feature.FeatureRule
 import misk.db.protos.feature.GetFeaturesRequest
 import wisp.feature.fromSafeJson
 import wisp.moshi.defaultKotlinMoshi
-import xyz.adrw.hotwire.templates.component
 import javax.inject.Inject
 
 class CreateOrUpdateHandler @Inject private constructor(
   private val api: InternalApi,
 ) {
-  fun get() = component<Props> { props ->
+  fun get(tagConsumer: TagConsumer<*>, props: Props) {
     val response = api.GetFeatures(GetFeaturesRequest(props.create_name))
     val feature = response.features.firstOrNull()
 
     if (!props.create_name.isNullOrBlank() && props.is_update && feature != null) {
       // Show update form
-      CreatePageHtml(
+      tagConsumer.CreatePageHtml(
         CreateHtmlProps(
           is_update = true,
           feature_type_index = props.feature_type_index,
@@ -41,7 +41,7 @@ class CreateOrUpdateHandler @Inject private constructor(
       )
     } else {
       // Show new form
-      CreatePageHtml(
+      tagConsumer.CreatePageHtml(
         CreateHtmlProps(
           select_input_id = props.select_input_id,
           select_input_is_expanded = props.select_input_is_expanded,
@@ -54,7 +54,7 @@ class CreateOrUpdateHandler @Inject private constructor(
     }
   }
 
-  fun submit() = component<Props> { props ->
+  fun submit(tagConsumer: TagConsumer<*>, props: Props) {
     var formNameLabelError: String? = null
     var formValueLabelError: String? = null
     var formTypeJavaClassNameLabelError: String? = null
@@ -131,7 +131,7 @@ class CreateOrUpdateHandler @Inject private constructor(
       }
     }
 
-    CreatePageHtml(
+    tagConsumer.CreatePageHtml(
       CreateHtmlProps(
         formNameLabelError = formNameLabelError,
         formValueLabelError = formValueLabelError,

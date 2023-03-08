@@ -1,5 +1,6 @@
 package xyz.adrw.hotwire.tailwinds
 
+import kotlinx.html.TagConsumer
 import kotlinx.html.div
 import kotlinx.html.span
 import kotlinx.html.table
@@ -8,7 +9,6 @@ import kotlinx.html.td
 import kotlinx.html.th
 import kotlinx.html.thead
 import kotlinx.html.tr
-import xyz.adrw.hotwire.templates.component
 import xyz.adrw.hotwire.templates.turbo_frame
 
 data class StringTableProps(
@@ -19,7 +19,7 @@ data class StringTableProps(
 
 val StringTableId = "table_frame"
 
-val StringTable = component<StringTableProps> { props ->
+fun TagConsumer<*>.StringTable(props: StringTableProps) {
   val header = props.data.first()
   val dataRows = props.query?.let { query ->
     props.data.drop(1).filter { row ->

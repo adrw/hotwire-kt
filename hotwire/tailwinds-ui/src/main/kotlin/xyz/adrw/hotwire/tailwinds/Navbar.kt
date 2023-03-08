@@ -2,6 +2,7 @@ package xyz.adrw.hotwire.tailwinds
 
 import kotlinx.html.ButtonType
 import kotlinx.html.InputType
+import kotlinx.html.TagConsumer
 import kotlinx.html.a
 import kotlinx.html.button
 import kotlinx.html.div
@@ -12,7 +13,6 @@ import kotlinx.html.img
 import kotlinx.html.input
 import kotlinx.html.nav
 import kotlinx.html.span
-import xyz.adrw.hotwire.templates.component
 
 data class NavbarProps(
   val mobileMenuIsOpen: Boolean = false,
@@ -23,7 +23,7 @@ data class NavbarProps(
   val loginPath: String = "#",
 )
 
-val Navbar = component<NavbarProps> { props ->
+fun TagConsumer<*>.Navbar(props: NavbarProps) {
   nav("bg-gray-800") {
     div("max-w-7xl mx-auto px-2 sm:px-6 lg:px-8") {
       div("relative flex items-center justify-between h-16") {

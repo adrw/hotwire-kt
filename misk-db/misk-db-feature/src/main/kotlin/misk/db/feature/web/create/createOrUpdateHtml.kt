@@ -1,6 +1,7 @@
 package misk.db.feature.web.create
 
 import kotlinx.html.InputType
+import kotlinx.html.TagConsumer
 import kotlinx.html.a
 import kotlinx.html.code
 import kotlinx.html.div
@@ -25,7 +26,6 @@ import misk.db.protos.feature.Feature
 import xyz.adrw.hotwire.tailwinds.SelectInput
 import xyz.adrw.hotwire.tailwinds.SelectInputProps
 import xyz.adrw.hotwire.tailwinds.SelectOption
-import xyz.adrw.hotwire.templates.component
 import xyz.adrw.hotwire.templates.turbo_frame
 
 const val CreatePath = "create"
@@ -57,7 +57,7 @@ data class CreateHtmlProps(
 )
 
 val selectFeatureTypeLabel = """Type: feature type that your flag always produces when evaluated"""
-val SelectFeatureTypeHtml = component<CreateHtmlProps> { props ->
+fun TagConsumer<*>.SelectFeatureTypeHtml(props: CreateHtmlProps) {
   val isExpanded =
     if (props.select_input_id == CreateFormExpandFeatureTypeId) props.select_input_is_expanded else false
   SelectInput(
@@ -94,15 +94,14 @@ val SelectFeatureTypeHtml = component<CreateHtmlProps> { props ->
   )
 }
 
-val CreatePageHtml = component<CreateHtmlProps> { props ->
+fun TagConsumer<*>.CreatePageHtml(props: CreateHtmlProps) {
   div {
     id = CreatePath
-
     CreateForm(props)
   }
 }
 
-val CreateForm = component<CreateHtmlProps> { props ->
+fun TagConsumer<*>.CreateForm(props: CreateHtmlProps) {
   turbo_frame(CreatePath) {
     div("mt-1 relative rounded-md shadow-sm") {
       a(classes = "block text-right") {

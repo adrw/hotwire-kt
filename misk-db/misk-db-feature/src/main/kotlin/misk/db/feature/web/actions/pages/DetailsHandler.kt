@@ -28,7 +28,7 @@ class DetailsHandler @Inject private constructor(
         }
       }) {
         turbo_frame(TAB_ROOT_ID) {
-          detailsHandler.get()(DetailsHandler.Props(query))
+          detailsHandler.get(this.consumer, DetailsHandler.Props(query))
         }
       }
     }

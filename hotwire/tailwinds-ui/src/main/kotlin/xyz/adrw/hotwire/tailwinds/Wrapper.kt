@@ -9,13 +9,12 @@ import kotlinx.html.link
 import kotlinx.html.meta
 import kotlinx.html.script
 import kotlinx.html.title
-import xyz.adrw.hotwire.templates.TemplateRenderer
 
 fun TagConsumer<*>.Wrapper(
   title: String = "",
-  headBlock: TemplateRenderer = {},
+  headBlock: TagConsumer<*>.() -> Unit = {},
   useCache: Boolean = true,
-  bodyBlock: TemplateRenderer
+  bodyBlock: TagConsumer<*>.() -> Unit
 ) {
   html {
     head {

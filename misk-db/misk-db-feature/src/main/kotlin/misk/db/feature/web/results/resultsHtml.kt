@@ -1,6 +1,7 @@
 package misk.db.feature.web.results
 
 import kotlinx.html.InputType
+import kotlinx.html.TagConsumer
 import kotlinx.html.a
 import kotlinx.html.br
 import kotlinx.html.div
@@ -14,7 +15,6 @@ import misk.db.feature.web.create.CreatePath
 import xyz.adrw.hotwire.tailwinds.Table
 import xyz.adrw.hotwire.tailwinds.TableProps
 import xyz.adrw.hotwire.templates.TurboStreamAction
-import xyz.adrw.hotwire.templates.component
 import xyz.adrw.hotwire.templates.template
 import xyz.adrw.hotwire.templates.turbo_frame
 import xyz.adrw.hotwire.templates.turbo_stream
@@ -31,14 +31,14 @@ data class FlagPageHtmlProps(
   val flagResults: TableProps,
 )
 
-val FlagPageHtml = component<FlagPageHtmlProps> { props ->
+fun TagConsumer<*>.FlagPageHtml(props: FlagPageHtmlProps) {
   div {
     FlagForm(props)
     FlagResultsFrame(props)
   }
 }
 
-val FlagForm = component<FlagPageHtmlProps> { props ->
+fun TagConsumer<*>.FlagForm(props: FlagPageHtmlProps) {
   div("mt-1 relative rounded-md shadow-sm") {
     form {
       action = PathBuilder(frame = ResultsFormId).build(public = false)
@@ -74,13 +74,13 @@ val FlagForm = component<FlagPageHtmlProps> { props ->
   }
 }
 
-val FlagResultsFrame = component<FlagPageHtmlProps> { props ->
+fun TagConsumer<*>.FlagResultsFrame(props: FlagPageHtmlProps) {
   turbo_frame(props.resultsId) {
     FlagResults(props)
   }
 }
 
-val FlagResultsStream = component<FlagPageHtmlProps> { props ->
+fun TagConsumer<*>.FlagResultsStream(props: FlagPageHtmlProps) {
   turbo_stream(TurboStreamAction.REPLACE, props.resultsId) {
     template {
       div {
@@ -91,7 +91,7 @@ val FlagResultsStream = component<FlagPageHtmlProps> { props ->
   }
 }
 
-val FlagResults = component<FlagPageHtmlProps> { props ->
+fun TagConsumer<*>.FlagResults(props: FlagPageHtmlProps) {
   div("mt-1 relative rounded-md shadow-sm") {
     br {}
     Table(props.flagResults)
