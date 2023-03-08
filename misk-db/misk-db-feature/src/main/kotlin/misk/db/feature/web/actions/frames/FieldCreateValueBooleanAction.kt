@@ -38,7 +38,7 @@ class FieldCreateValueBooleanAction @Inject constructor(
     // Additional query parameter encoded data is explicitly added here
   ): String = buildHtml {
     Wrapper {
-      createOrUpdateHandler.get()(
+      createOrUpdateHandler.get(this,
         CreateOrUpdateHandler.Props(
           is_update = is_update?.toBooleanStrictOrNull() ?: false,
           select_input_id = select_input_id,

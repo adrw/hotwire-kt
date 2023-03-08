@@ -1,8 +1,6 @@
 package misk.db.feature.web.actions.pages
 
 import kotlinx.html.script
-import misk.db.feature.web.create.CreateOrUpdateHandler
-import misk.db.feature.web.details.DetailsHandler
 import misk.db.feature.web.results.ResultsHandler
 import xyz.adrw.hotwire.tailwinds.Wrapper
 import xyz.adrw.hotwire.templates.buildHtml
@@ -10,8 +8,6 @@ import xyz.adrw.hotwire.templates.turbo_frame
 import javax.inject.Inject
 
 class IndexHandler @Inject private constructor(
-  private val createOrUpdateHandler: CreateOrUpdateHandler,
-  private val detailsHandler: DetailsHandler,
   private val resultsHandler: ResultsHandler,
 ) {
   fun handle(
@@ -31,7 +27,7 @@ class IndexHandler @Inject private constructor(
         }
       }) {
         turbo_frame(TAB_ROOT_ID) {
-          resultsHandler.get()(ResultsHandler.Props(query))
+          resultsHandler.get(this.consumer, ResultsHandler.Props(query))
         }
       }
     }

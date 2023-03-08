@@ -1,19 +1,19 @@
 package misk.db.feature.web.results
 
+import kotlinx.html.TagConsumer
 import misk.db.feature.web.InternalApi
 import misk.db.feature.web.results.FlagSearchResultsTableRow.Companion.toTableRow
 import misk.db.protos.feature.GetFeaturesRequest
 import xyz.adrw.hotwire.tailwinds.TableProps
-import xyz.adrw.hotwire.templates.component
 import javax.inject.Inject
 
 class ResultsHandler @Inject private constructor(
   private val api: InternalApi
 ) {
-  fun get() = component<Props> { props ->
+  fun get(tagConsumer: TagConsumer<*>, props: Props) {
     val allFlags = api.GetFeatures(GetFeaturesRequest(props.query))
 
-    FlagPageHtml(
+    tagConsumer.FlagPageHtml(
       FlagPageHtmlProps(
         formId = ResultsFormId,
         resultsId = ResultsId,
@@ -29,10 +29,10 @@ class ResultsHandler @Inject private constructor(
     )
   }
 
-  fun stream() = component<Props> { props ->
+  fun stream(tagConsumer: TagConsumer<*>, props: Props) {
     val allFlags = api.GetFeatures(GetFeaturesRequest(props.query))
 
-    FlagResultsStream(
+    tagConsumer.FlagResultsStream(
       FlagPageHtmlProps(
         formId = ResultsFormId,
         resultsId = ResultsId,

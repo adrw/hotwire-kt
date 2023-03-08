@@ -1,9 +1,9 @@
 package xyz.adrw.hotwire.tailwinds
 
+import kotlinx.html.TagConsumer
 import kotlinx.html.div
 import kotlinx.html.h1
 import kotlinx.html.header
-import xyz.adrw.hotwire.templates.layout
 
 data class NavbarPageProps(
   val title: String,
@@ -17,7 +17,7 @@ data class NavbarPageProps(
 
 val NavbarPageContentFrameId = "content"
 
-val NavbarPage = layout<NavbarPageProps> { props, content ->
+fun TagConsumer<*>.NavbarPage(props: NavbarPageProps, content: TagConsumer<*>.() -> Unit) {
   Wrapper(props.title, {}) {
     Navbar(NavbarProps(
       homePath = props.homePath,

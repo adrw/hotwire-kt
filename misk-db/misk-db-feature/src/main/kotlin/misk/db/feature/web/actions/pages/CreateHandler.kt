@@ -28,7 +28,7 @@ class CreateHandler @Inject private constructor(
         }
       }) {
         turbo_frame(TAB_ROOT_ID) {
-          createOrUpdateHandler.get()(
+          createOrUpdateHandler.get(this.consumer,
             CreateOrUpdateHandler.Props(
               create_name = query,
               is_update = is_update?.toBooleanStrictOrNull() ?: false,

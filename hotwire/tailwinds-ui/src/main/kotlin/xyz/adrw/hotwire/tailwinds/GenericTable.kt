@@ -1,5 +1,6 @@
 package xyz.adrw.hotwire.tailwinds
 
+import kotlinx.html.TagConsumer
 import kotlinx.html.a
 import kotlinx.html.div
 import kotlinx.html.span
@@ -10,7 +11,6 @@ import kotlinx.html.th
 import kotlinx.html.thead
 import kotlinx.html.tr
 import xyz.adrw.hotwire.templates.Link
-import xyz.adrw.hotwire.templates.component
 import xyz.adrw.hotwire.templates.turbo_frame
 import java.time.Instant
 import java.time.ZoneId
@@ -33,7 +33,7 @@ data class TableProps(
   val limit: Int? = null,
 )
 
-val Table = component<TableProps> { props ->
+fun TagConsumer<*>.Table(props: TableProps) {
   val header = props.headers
   val dataRows = props.data
   val truncated = dataRows.take(props.limit ?: 25)

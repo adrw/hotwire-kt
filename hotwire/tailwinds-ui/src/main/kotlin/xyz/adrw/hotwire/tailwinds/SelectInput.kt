@@ -1,6 +1,7 @@
 package xyz.adrw.hotwire.tailwinds
 
 import kotlinx.html.ButtonType
+import kotlinx.html.TagConsumer
 import kotlinx.html.a
 import kotlinx.html.button
 import kotlinx.html.div
@@ -12,7 +13,6 @@ import kotlinx.html.role
 import kotlinx.html.span
 import kotlinx.html.style
 import kotlinx.html.ul
-import xyz.adrw.hotwire.templates.component
 
 data class SelectInputProps(
   val frameId: String,
@@ -35,7 +35,7 @@ data class SelectOption(
   val avatarUrl: String? = null,
 )
 
-val SelectInput = component<SelectInputProps> { props ->
+fun TagConsumer<*>.SelectInput(props: SelectInputProps) {
 //  turbo_frame(id = props.frameId) {
     div {
       label("block ${props.textSizeOverride ?: "text-sm"} font-medium text-gray-700") {

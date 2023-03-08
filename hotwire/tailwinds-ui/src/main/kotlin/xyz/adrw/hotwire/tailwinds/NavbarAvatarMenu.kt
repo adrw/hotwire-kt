@@ -1,6 +1,7 @@
 package xyz.adrw.hotwire.tailwinds
 
 import kotlinx.html.ButtonType
+import kotlinx.html.TagConsumer
 import kotlinx.html.a
 import kotlinx.html.button
 import kotlinx.html.div
@@ -8,7 +9,6 @@ import kotlinx.html.id
 import kotlinx.html.img
 import kotlinx.html.role
 import kotlinx.html.span
-import xyz.adrw.hotwire.templates.component
 import xyz.adrw.hotwire.templates.turbo_frame
 
 data class NavbarAvatarMenuProps(
@@ -22,7 +22,7 @@ data class NavbarAvatarMenuProps(
 
 val NavbarAvatarMenuId = "avatar_menu_frame"
 
-val NavbarAvatarMenu = component<NavbarAvatarMenuProps> { props ->
+fun TagConsumer<*>.NavbarAvatarMenu(props: NavbarAvatarMenuProps) {
   turbo_frame(NavbarAvatarMenuId) {
     //          +"""<!-- Profile dropdown -->"""
     div("ml-3 relative") {
