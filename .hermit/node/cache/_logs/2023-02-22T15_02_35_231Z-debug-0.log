@@ -1,0 +1,38 @@
+0 verbose cli /Users/adrw/Library/Caches/hermit/pkg/node@16/bin/node /Users/adrw/Library/Caches/hermit/pkg/node@16/bin/npm
+1 info using npm@8.19.3
+2 info using node@v16.19.1
+3 timing npm:load:whichnode Completed in 0ms
+4 timing config:load:defaults Completed in 2ms
+5 timing config:load:file:/Users/adrw/Library/Caches/hermit/pkg/node@16/lib/node_modules/npm/npmrc Completed in 0ms
+6 timing config:load:builtin Completed in 0ms
+7 timing config:load:cli Completed in 1ms
+8 timing config:load:env Completed in 0ms
+9 timing config:load:file:/Volumes/code/src/github.com/hotwire-kt/misk-db/misk-db-feature/web/tabs/feature/.npmrc Completed in 0ms
+10 timing config:load:project Completed in 1ms
+11 timing config:load:file:/Users/adrw/.npmrc Completed in 1ms
+12 timing config:load:user Completed in 1ms
+13 timing config:load:file:/Volumes/code/src/github.com/hotwire-kt/.hermit/node/etc/npmrc Completed in 0ms
+14 timing config:load:global Completed in 0ms
+15 timing config:load:validate Completed in 0ms
+16 timing config:load:credentials Completed in 1ms
+17 timing config:load:setEnvs Completed in 0ms
+18 timing config:load Completed in 6ms
+19 timing npm:load:configload Completed in 6ms
+20 timing npm:load:mkdirpcache Completed in 0ms
+21 timing npm:load:mkdirplogs Completed in 0ms
+22 verbose title npm run-script prebuild
+23 verbose argv "run-script" "prebuild"
+24 timing npm:load:setTitle Completed in 5ms
+25 timing config:load:flatten Completed in 1ms
+26 timing npm:load:display Completed in 1ms
+27 verbose logfile logs-max:10 dir:/Volumes/code/src/github.com/hotwire-kt/.hermit/node/cache/_logs
+28 verbose logfile /Volumes/code/src/github.com/hotwire-kt/.hermit/node/cache/_logs/2023-02-22T15_02_35_231Z-debug-0.log
+29 timing npm:load:logFile Completed in 2ms
+30 timing npm:load:timers Completed in 0ms
+31 timing npm:load:configScope Completed in 0ms
+32 timing npm:load Completed in 17ms
+33 silly logfile done cleaning log files
+34 timing command:run-script Completed in 2589ms
+35 verbose exit 0
+36 timing npm Completed in 2608ms
+37 info ok

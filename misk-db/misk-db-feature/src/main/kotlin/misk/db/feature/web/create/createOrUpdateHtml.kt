@@ -1,6 +1,7 @@
 package misk.db.feature.web.create
 
 import kotlinx.html.InputType
+import kotlinx.html.TagConsumer
 import kotlinx.html.a
 import kotlinx.html.code
 import kotlinx.html.div
@@ -102,7 +103,9 @@ val CreatePageHtml = component<CreateHtmlProps> { props ->
   }
 }
 
-val CreateForm = component<CreateHtmlProps> { props ->
+// TODO chat with Frank Yan
+// TODO make all vals functions
+fun TagConsumer<*>.CreateForm(props: CreateHtmlProps) {
   turbo_frame(CreatePath) {
     div("mt-1 relative rounded-md shadow-sm") {
       a(classes = "block text-right") {
