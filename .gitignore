@@ -7,3 +7,4 @@ build/
 *.swp
 docker-sources/
 local.settings.gradle.kts
+.hermit
