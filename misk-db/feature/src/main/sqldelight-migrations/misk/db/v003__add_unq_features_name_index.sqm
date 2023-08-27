@@ -1,0 +1,2 @@
+-- Copied from misk-db-feature
+ALTER TABLE features ADD UNIQUE INDEX `unq_features_name_index` (`name`);

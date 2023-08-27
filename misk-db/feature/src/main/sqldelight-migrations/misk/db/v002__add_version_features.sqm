@@ -1,0 +1,2 @@
+-- Copied from misk-db-feature
+ALTER TABLE features ADD `version` integer AS LOCK NOT NULL DEFAULT 0;

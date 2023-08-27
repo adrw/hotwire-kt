@@ -16,8 +16,8 @@ application {
 }
 
 dependencies {
-  implementation(projects.hotwire.kotlinxHtmlTemplates)
-  implementation(projects.hotwire.tailwindsUi)
+  implementation(projects.hotwireKt.kotlinxHtmlTemplates)
+  implementation(projects.hotwireKt.tailwindsUi)
 
   implementation(Dependencies.mustacheCompiler)
   implementation(Dependencies.kotlinxHtml)
