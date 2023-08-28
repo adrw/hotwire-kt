@@ -1,4 +1,4 @@
-package misk.db.feature.web.create
+package misk.db.feature.web.v1.create
 
 import kotlinx.html.TagConsumer
 import misk.db.feature.DbFeatureFlags.Companion.evaluateSerialized
@@ -10,6 +10,7 @@ import misk.db.protos.feature.Feature
 import misk.db.protos.feature.FeatureConfig
 import misk.db.protos.feature.FeatureRule
 import misk.db.protos.feature.GetFeaturesRequest
+import wisp.feature.Attributes
 import wisp.feature.fromSafeJson
 import wisp.moshi.defaultKotlinMoshi
 import javax.inject.Inject
@@ -31,7 +32,7 @@ class CreateOrUpdateHandler @Inject private constructor(
           create_value = feature.config!!.evaluateSerialized(
             feature.config.getFeatureClazz(),
             "default-key",
-            wisp.feature.Attributes()
+            Attributes()
           ).toString(),
           formValueLabelHint = if (props.feature_type_index == FeatureType.ENUM.ordinal) {
             getEnumHint(feature.config.getFeatureClazz())

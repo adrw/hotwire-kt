@@ -1,4 +1,4 @@
-package misk.db.feature.web.create
+package misk.db.feature.web.v1.create
 
 import kotlinx.html.InputType
 import kotlinx.html.TagConsumer
@@ -20,8 +20,8 @@ import misk.db.feature.web.PathBuilder
 import misk.db.feature.web.PathBuilder.Companion.CreateNameParam
 import misk.db.feature.web.PathBuilder.Companion.CreateValueParam
 import misk.db.feature.web.PathBuilder.Companion.TypeJavaClassNameParam
-import misk.db.feature.web.details.DetailsPath
-import misk.db.feature.web.results.ResultsPath
+import misk.db.feature.web.v1.details.DetailsPath
+import misk.db.feature.web.v1.results.ResultsPath
 import misk.db.protos.feature.Feature
 import xyz.adrw.hotwire.tailwinds.SelectInput
 import xyz.adrw.hotwire.tailwinds.SelectInputProps

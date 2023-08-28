@@ -1,9 +1,9 @@
-package misk.db.feature.web.details
+package misk.db.feature.web.v1.details
 
 import kotlinx.html.TagConsumer
 import misk.db.feature.web.InternalApi
-import misk.db.feature.web.results.ResultsFormId
-import misk.db.feature.web.results.ResultsId
+import misk.db.feature.web.v1.results.ResultsFormId
+import misk.db.feature.web.v1.results.ResultsId
 import misk.db.protos.feature.GetFeaturesRequest
 import javax.inject.Inject
 

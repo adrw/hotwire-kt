@@ -1,4 +1,4 @@
-package misk.db.feature.web.details
+package misk.db.feature.web.v1.details
 
 import kotlinx.html.TagConsumer
 import kotlinx.html.a
@@ -12,8 +12,8 @@ import kotlinx.html.style
 import misk.db.feature.getFeatureClazz
 import misk.db.feature.toFeatureType
 import misk.db.feature.web.PathBuilder
-import misk.db.feature.web.create.CreatePath
-import misk.db.feature.web.results.ResultsPath
+import misk.db.feature.web.v1.create.CreatePath
+import misk.db.feature.web.v1.results.ResultsPath
 import misk.db.protos.feature.Feature
 import xyz.adrw.hotwire.templates.TurboStreamAction
 import xyz.adrw.hotwire.templates.template

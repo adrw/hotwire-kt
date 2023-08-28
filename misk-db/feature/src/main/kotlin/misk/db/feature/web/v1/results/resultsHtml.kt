@@ -1,4 +1,4 @@
-package misk.db.feature.web.results
+package misk.db.feature.web.v1.results
 
 import kotlinx.html.InputType
 import kotlinx.html.TagConsumer
@@ -11,7 +11,7 @@ import kotlinx.html.input
 import kotlinx.html.label
 import misk.db.feature.web.PathBuilder
 import misk.db.feature.web.PathBuilder.Companion.SearchParam
-import misk.db.feature.web.create.CreatePath
+import misk.db.feature.web.v1.create.CreatePath
 import xyz.adrw.hotwire.tailwinds.Table
 import xyz.adrw.hotwire.tailwinds.TableProps
 import xyz.adrw.hotwire.templates.TurboStreamAction

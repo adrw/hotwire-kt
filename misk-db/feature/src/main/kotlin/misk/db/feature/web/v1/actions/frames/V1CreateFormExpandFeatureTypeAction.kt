@@ -1,8 +1,8 @@
-package misk.db.feature.web.actions.frames
+package misk.db.feature.web.v1.actions.frames
 
 import misk.db.feature.web.PathBuilder.Companion.UI_FRAME_BASE_URL
-import misk.db.feature.web.create.CreateFormChooseFeatureTypeId
-import misk.db.feature.web.create.CreateOrUpdateHandler
+import misk.db.feature.web.v1.create.CreateFormExpandFeatureTypeId
+import misk.db.feature.web.v1.create.CreateOrUpdateHandler
 import misk.web.Get
 import misk.web.QueryParam
 import misk.web.ResponseContentType
@@ -17,7 +17,7 @@ import javax.inject.Inject
  * Returns interactive UI from Hotwire Turbo Frame related clicks
  * Configuration of which UI to return and input data (ie. from forms) is provided by query parameters
  */
-class CreateFormChooseFeatureTypeAction @Inject constructor(
+class V1CreateFormExpandFeatureTypeAction @Inject constructor(
   private val createOrUpdateHandler: CreateOrUpdateHandler
 ) : WebAction {
   @Get("$UI_FRAME_BASE_URL/$PATH/")
@@ -53,7 +53,7 @@ class CreateFormChooseFeatureTypeAction @Inject constructor(
   }
 
   companion object {
-    const val PATH = CreateFormChooseFeatureTypeId
+    const val PATH = CreateFormExpandFeatureTypeId
   }
 }
 

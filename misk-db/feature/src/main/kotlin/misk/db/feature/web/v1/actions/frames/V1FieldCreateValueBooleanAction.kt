@@ -1,8 +1,8 @@
-package misk.db.feature.web.actions.frames
+package misk.db.feature.web.v1.actions.frames
 
 import misk.db.feature.web.PathBuilder.Companion.UI_FRAME_BASE_URL
-import misk.db.feature.web.create.CreateFormId
-import misk.db.feature.web.create.CreateOrUpdateHandler
+import misk.db.feature.web.v1.create.CreateOrUpdateHandler
+import misk.db.feature.web.v1.create.FieldCreateValueBoolean
 import misk.web.Get
 import misk.web.QueryParam
 import misk.web.ResponseContentType
@@ -17,7 +17,7 @@ import javax.inject.Inject
  * Returns interactive UI from Hotwire Turbo Frame related clicks
  * Configuration of which UI to return and input data (ie. from forms) is provided by query parameters
  */
-class CreateFormAction @Inject constructor(
+class V1FieldCreateValueBooleanAction @Inject constructor(
   private val createOrUpdateHandler: CreateOrUpdateHandler
 ) : WebAction {
   @Get("$UI_FRAME_BASE_URL/$PATH/")
@@ -38,7 +38,7 @@ class CreateFormAction @Inject constructor(
     // Additional query parameter encoded data is explicitly added here
   ): String = buildHtml {
     Wrapper {
-      createOrUpdateHandler.submit(this,
+      createOrUpdateHandler.get(this,
         CreateOrUpdateHandler.Props(
           is_update = is_update?.toBooleanStrictOrNull() ?: false,
           select_input_id = select_input_id,
@@ -53,7 +53,7 @@ class CreateFormAction @Inject constructor(
   }
 
   companion object {
-    const val PATH = CreateFormId
+    const val PATH = FieldCreateValueBoolean
   }
 }
 

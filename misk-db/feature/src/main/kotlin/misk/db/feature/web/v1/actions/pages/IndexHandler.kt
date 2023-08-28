@@ -1,15 +1,14 @@
-package misk.db.feature.web.actions.pages
+package misk.db.feature.web.v1.actions.pages
 
 import kotlinx.html.script
-import misk.db.feature.web.details.DetailsHandler
-import wisp.logging.getLogger
+import misk.db.feature.web.v1.results.ResultsHandler
 import xyz.adrw.hotwire.tailwinds.Wrapper
 import xyz.adrw.hotwire.templates.buildHtml
 import xyz.adrw.hotwire.templates.turbo_frame
 import javax.inject.Inject
 
-class DetailsHandler @Inject private constructor(
-  private val detailsHandler: DetailsHandler,
+class IndexHandler @Inject private constructor(
+  private val resultsHandler: ResultsHandler,
 ) {
   fun handle(
     frame: String?,
@@ -28,15 +27,13 @@ class DetailsHandler @Inject private constructor(
         }
       }) {
         turbo_frame(TAB_ROOT_ID) {
-          detailsHandler.get(this.consumer, DetailsHandler.Props(query))
+          resultsHandler.get(this.consumer, ResultsHandler.Props(query))
         }
       }
     }
   }
 
   companion object {
-    private val logger = getLogger<DetailsHandler>()
-
     private const val TAB_ROOT_ID = "tab-root"
   }
 }

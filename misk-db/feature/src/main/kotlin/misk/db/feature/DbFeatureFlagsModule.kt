@@ -10,13 +10,14 @@ import misk.db.FeatureQueries
 import misk.db.feature.api.CreateOrUpdateFeatureAction
 import misk.db.feature.api.DeleteFeatureAction
 import misk.db.feature.api.GetFeaturesAction
-import misk.db.feature.web.actions.frames.CreateFormAction
-import misk.db.feature.web.actions.frames.CreateFormChooseFeatureTypeAction
-import misk.db.feature.web.actions.frames.CreateFormExpandFeatureTypeAction
-import misk.db.feature.web.actions.frames.FieldCreateValueBooleanAction
-import misk.db.feature.web.actions.pages.CreateAction
-import misk.db.feature.web.actions.pages.DetailsAction
-import misk.db.feature.web.actions.pages.IndexAction
+import misk.db.feature.web.v1.actions.frames.V1CreateFormAction
+import misk.db.feature.web.v1.actions.frames.V1CreateFormChooseFeatureTypeAction
+import misk.db.feature.web.v1.actions.frames.V1CreateFormExpandFeatureTypeAction
+import misk.db.feature.web.v1.actions.frames.V1FieldCreateValueBooleanAction
+import misk.db.feature.web.v1.actions.pages.V1CreateAction
+import misk.db.feature.web.v1.actions.pages.V1DetailsAction
+import misk.db.feature.web.v1.actions.pages.V1IndexAction
+import misk.db.feature.web.v2.IndexAction
 import misk.feature.DynamicConfig
 import misk.feature.FeatureFlags
 import misk.feature.FeatureService
@@ -28,9 +29,7 @@ import misk.web.WebActionModule
 import misk.web.dashboard.AdminDashboard
 import misk.web.dashboard.AdminDashboardAccess
 import misk.web.dashboard.DashboardModule
-import misk.web.dashboard.DashboardTab
-import misk.web.dashboard.DashboardTabProvider
-import misk.web.dashboard.WebTabResourceModule
+import misk.web.v2.DashboardPageLayout.Companion.BETA_PREFIX
 import java.sql.Connection
 import java.time.Clock
 import javax.inject.Inject
@@ -84,20 +83,31 @@ class DbFeatureFlagsModule(
     install(WebActionModule.create<DeleteFeatureAction>())
 
     // Install admin dashboard tab backing web actions
-    // Pages
-    install(WebActionModule.create<CreateAction>())
-    install(WebActionModule.create<DetailsAction>())
-    install(WebActionModule.create<IndexAction>())
-    // Frames
-    install(WebActionModule.create<CreateFormAction>())
-    install(WebActionModule.create<CreateFormChooseFeatureTypeAction>())
-    install(WebActionModule.create<CreateFormExpandFeatureTypeAction>())
-    install(WebActionModule.create<FieldCreateValueBooleanAction>())
-    // Admin dashboard tab
-    install(DashboardModule.createMiskWebTab<AdminDashboard, AdminDashboardAccess>(
+    // v2 using Hotwire directly
+    install(DashboardModule.createHotwireTab<AdminDashboard, AdminDashboardAccess>(
       slug = "feature",
       urlPathPrefix = "/_admin/feature/",
       menuLabel = "Feature",
+      menuCategory = "Container Admin"
+    ))
+    install(WebActionModule.createWithPrefix<IndexAction>("$BETA_PREFIX/"))
+
+
+    // v1 using Misk-Web shim
+    // Pages
+    install(WebActionModule.create<V1CreateAction>())
+    install(WebActionModule.create<V1DetailsAction>())
+    install(WebActionModule.create<V1IndexAction>())
+    // Frames
+    install(WebActionModule.create<V1CreateFormAction>())
+    install(WebActionModule.create<V1CreateFormChooseFeatureTypeAction>())
+    install(WebActionModule.create<V1CreateFormExpandFeatureTypeAction>())
+    install(WebActionModule.create<V1FieldCreateValueBooleanAction>())
+    // Admin dashboard tab
+    install(DashboardModule.createMiskWebTab<AdminDashboard, AdminDashboardAccess>(
+      slug = "feature-v1",
+      urlPathPrefix = "/_admin/feature-v1/",
+      menuLabel = "Feature v1",
       menuCategory = "Container Admin",
       isDevelopment = isDevelopment,
       developmentWebProxyUrl = "http://localhost:3160/"

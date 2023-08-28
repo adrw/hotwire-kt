@@ -1,4 +1,4 @@
-package misk.db.feature.web.actions.pages
+package misk.db.feature.web.v1.actions.pages
 
 import misk.db.feature.web.PathBuilder.Companion.UI_PAGE_BASE_URL
 import misk.web.Get
@@ -14,10 +14,10 @@ import javax.inject.Inject
  *  with server generated Hotwire code instead of pure frontend React code.
  *
  */
-class DetailsAction @Inject constructor(
-  private val handler: DetailsHandler
-) : WebAction {
-  @Get("$UI_PAGE_BASE_URL/_admin/feature/flag/")
+class V1IndexAction @Inject constructor(
+  private val handler: IndexHandler
+): WebAction {
+  @Get("$UI_PAGE_BASE_URL/_admin/feature/")
   @ResponseContentType(MediaTypes.TEXT_HTML)
   @AdminDashboardAccess // set to dashboard access since this is UI layer
   fun get(

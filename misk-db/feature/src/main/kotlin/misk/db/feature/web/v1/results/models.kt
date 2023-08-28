@@ -1,7 +1,7 @@
-package misk.db.feature.web.results
+package misk.db.feature.web.v1.results
 
 import misk.db.feature.web.PathBuilder
-import misk.db.feature.web.details.DetailsPath
+import misk.db.feature.web.v1.details.DetailsPath
 import misk.db.protos.feature.Feature
 import xyz.adrw.hotwire.tailwinds.TableHeader
 import xyz.adrw.hotwire.tailwinds.TableRow

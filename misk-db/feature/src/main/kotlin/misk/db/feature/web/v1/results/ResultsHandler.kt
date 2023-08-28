@@ -1,8 +1,8 @@
-package misk.db.feature.web.results
+package misk.db.feature.web.v1.results
 
 import kotlinx.html.TagConsumer
 import misk.db.feature.web.InternalApi
-import misk.db.feature.web.results.FlagSearchResultsTableRow.Companion.toTableRow
+import misk.db.feature.web.v1.results.FlagSearchResultsTableRow.Companion.toTableRow
 import misk.db.protos.feature.GetFeaturesRequest
 import xyz.adrw.hotwire.tailwinds.TableProps
 import javax.inject.Inject

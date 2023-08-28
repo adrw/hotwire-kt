@@ -1,7 +1,7 @@
-package misk.db.feature.web.actions.pages
+package misk.db.feature.web.v1.actions.pages
 
 import kotlinx.html.script
-import misk.db.feature.web.create.CreateOrUpdateHandler
+import misk.db.feature.web.v1.create.CreateOrUpdateHandler
 import wisp.logging.getLogger
 import xyz.adrw.hotwire.tailwinds.Wrapper
 import xyz.adrw.hotwire.templates.buildHtml
