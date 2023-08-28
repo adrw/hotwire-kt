@@ -8,7 +8,7 @@ import xyz.adrw.hotwire.templates.buildHtml
 import xyz.adrw.hotwire.templates.turbo_frame
 import javax.inject.Inject
 
-class CreateHandler @Inject private constructor(
+class V1CreateHandler @Inject private constructor(
   private val createOrUpdateHandler: CreateOrUpdateHandler,
 ) {
   fun handle(
@@ -41,7 +41,7 @@ class CreateHandler @Inject private constructor(
   }
 
   companion object {
-    private val logger = getLogger<CreateHandler>()
+    private val logger = getLogger<V1CreateHandler>()
 
     private const val TAB_ROOT_ID = "tab-root"
   }

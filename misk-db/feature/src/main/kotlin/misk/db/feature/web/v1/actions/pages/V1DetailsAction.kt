@@ -15,7 +15,7 @@ import javax.inject.Inject
  *
  */
 class V1DetailsAction @Inject constructor(
-  private val handler: DetailsHandler
+  private val handler: V1DetailsHandler
 ) : WebAction {
   @Get("$UI_PAGE_BASE_URL/_admin/feature/flag/")
   @ResponseContentType(MediaTypes.TEXT_HTML)

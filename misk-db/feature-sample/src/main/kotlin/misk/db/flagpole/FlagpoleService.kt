@@ -21,8 +21,8 @@ import misk.db.flagpole.persistence.FlagpolePersistenceModule
 private const val SERVICE_NAME = "flagpole"
 
 fun main(args: Array<String>) {
+  FlagpoleLogging.configure()
   val deployment = DEVELOPMENT
-//  FlagpoleLogging.configure()
   val config = MiskConfig.load<FlagpoleConfig>(SERVICE_NAME, deployment)
   MiskApplication(
     MiskRealServiceModule(),

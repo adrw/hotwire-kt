@@ -15,7 +15,7 @@ import javax.inject.Inject
  *
  */
 class V1IndexAction @Inject constructor(
-  private val handler: IndexHandler
+  private val handler: V1IndexHandler
 ): WebAction {
   @Get("$UI_PAGE_BASE_URL/_admin/feature/")
   @ResponseContentType(MediaTypes.TEXT_HTML)

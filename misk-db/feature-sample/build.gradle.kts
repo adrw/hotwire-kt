@@ -15,7 +15,10 @@ application {
 dependencies {
   implementation(projects.miskDb.feature)
 
+  // Logging
   implementation(Dependencies.logbackClassic)
+
+  // Misk
   implementation(Dependencies.misk)
   implementation(Dependencies.miskAdmin)
   implementation(Dependencies.miskCore)

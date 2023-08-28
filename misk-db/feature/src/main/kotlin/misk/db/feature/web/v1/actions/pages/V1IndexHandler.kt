@@ -7,7 +7,7 @@ import xyz.adrw.hotwire.templates.buildHtml
 import xyz.adrw.hotwire.templates.turbo_frame
 import javax.inject.Inject
 
-class IndexHandler @Inject private constructor(
+class V1IndexHandler @Inject private constructor(
   private val resultsHandler: ResultsHandler,
 ) {
   fun handle(

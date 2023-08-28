@@ -8,7 +8,7 @@ import xyz.adrw.hotwire.templates.buildHtml
 import xyz.adrw.hotwire.templates.turbo_frame
 import javax.inject.Inject
 
-class DetailsHandler @Inject private constructor(
+class V1DetailsHandler @Inject private constructor(
   private val detailsHandler: DetailsHandler,
 ) {
   fun handle(

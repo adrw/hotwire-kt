@@ -15,7 +15,7 @@ import javax.inject.Inject
  *
  */
 class V1CreateAction @Inject constructor(
-  private val handler: CreateHandler
+  private val handler: V1CreateHandler
 ): WebAction {
   @Get("$UI_PAGE_BASE_URL/_admin/feature/create/")
   @ResponseContentType(MediaTypes.TEXT_HTML)

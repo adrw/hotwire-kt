@@ -19,9 +19,9 @@ data class PathBuilder(
   fun build(
     public: Boolean = true,
   ): String = StringBuilder().apply {
-    val normalizedPath = path?.removePrefix("/")
+    val normalizedPath = path?.removePrefix("/")?.removeSuffix("/")
 
-    if (public) append(TAB_PATH_BASE_URL) else append(UI_FRAME_BASE_URL)
+//    if (public) append(TAB_PATH_BASE_URL) else append(UI_FRAME_BASE_URL)
     if (normalizedPath?.isNotBlank() == true) {
       append("/$normalizedPath/")
     } else if (!public && frame != null) {

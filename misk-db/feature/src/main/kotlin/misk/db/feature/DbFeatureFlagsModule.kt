@@ -17,7 +17,8 @@ import misk.db.feature.web.v1.actions.frames.V1FieldCreateValueBooleanAction
 import misk.db.feature.web.v1.actions.pages.V1CreateAction
 import misk.db.feature.web.v1.actions.pages.V1DetailsAction
 import misk.db.feature.web.v1.actions.pages.V1IndexAction
-import misk.db.feature.web.v2.IndexAction
+import misk.db.feature.web.v2.frames.InlineEditAction
+import misk.db.feature.web.v2.pages.IndexAction
 import misk.feature.DynamicConfig
 import misk.feature.FeatureFlags
 import misk.feature.FeatureService
@@ -90,7 +91,12 @@ class DbFeatureFlagsModule(
       menuLabel = "Feature",
       menuCategory = "Container Admin"
     ))
+
+    // Pages
     install(WebActionModule.createWithPrefix<IndexAction>("$BETA_PREFIX/"))
+
+    // Frames
+    install(WebActionModule.create<InlineEditAction>())
 
 
     // v1 using Misk-Web shim
