@@ -22,9 +22,8 @@ import misk.web.ResponseContentType
 import misk.web.actions.WebAction
 import misk.web.dashboard.AdminDashboardAccess
 import misk.web.mediatype.MediaTypes
-import misk.web.v2.HtmlLayout
+import misk.web.v2.DashboardPageLayout
 import wisp.feature.Attributes
-import xyz.adrw.hotwire.templates.buildHtml
 import xyz.adrw.hotwire.templates.turbo_frame
 import java.time.Instant
 import javax.inject.Inject
@@ -35,20 +34,21 @@ import kotlin.time.toDuration
 @Singleton
 class InlineEditAction @Inject private constructor(
   private val api: InternalApi,
+  private val dashboardPageLayout: DashboardPageLayout,
 ) : WebAction {
   @Get(PATH)
   @ResponseContentType(MediaTypes.TEXT_HTML)
   @AdminDashboardAccess
   fun get(
     @QueryParam q: String?,
-  ): String = buildHtml {
-    HtmlLayout(
-      appRoot = "/_admin/",
-      title = "",
-      playCdn = true,
-      headBlock = {}
-    ) {
-      turbo_frame("feature::$q") {
+  ): String = dashboardPageLayout
+    .newBuilder()
+    .build { appName, _, _ ->
+      turbo_frame("feature-$q") {
+        if (q == NEW_FEATURE_NAME) {
+          // TODO()
+        }
+
         val feature = api.GetFeatures(GetFeaturesRequest(q)).features.firstOrNull { it.name == q }
 
         if (feature == null) {
@@ -199,7 +199,6 @@ class InlineEditAction @Inject private constructor(
         }
       }
     }
-  }
 
   companion object {
     const val PATH = "/frames/feature/edit/"

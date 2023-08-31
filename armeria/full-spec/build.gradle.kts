@@ -19,8 +19,9 @@ dependencies {
   implementation(projects.hotwireKt.kotlinxHtmlTemplates)
   implementation(projects.hotwireKt.tailwindsUi)
 
-  implementation(Dependencies.mustacheCompiler)
   implementation(Dependencies.kotlinxHtml)
+  implementation(Dependencies.logbackClassic)
+  implementation(Dependencies.mustacheCompiler)
   implementation(Dependencies.okio)
   implementation(Dependencies.wispLogging)
 

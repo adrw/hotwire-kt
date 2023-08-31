@@ -37,8 +37,8 @@ import kotlin.time.toDuration
 
 @Singleton
 class IndexAction @Inject private constructor(
-  private val dashboardPageLayout: DashboardPageLayout,
   private val api: InternalApi,
+  private val dashboardPageLayout: DashboardPageLayout,
 ) : WebAction {
   @Get("/_admin/feature/")
   @ResponseContentType(MediaTypes.TEXT_HTML)
@@ -62,12 +62,12 @@ class IndexAction @Inject private constructor(
           role = "list"
 
           // Add a row for a new flag create form
-          turbo_frame("feature::${NEW_FEATURE_NAME}") {
+          turbo_frame("feature-${NEW_FEATURE_NAME}") {
             span {}
           }
 
           features.map { feature ->
-            turbo_frame("feature::${feature.name}") {
+            turbo_frame("feature-${feature.name}") {
               this@ul.li("flex items-center justify-between gap-x-6 py-5") {
                 div("min-w-0") {
                   div("flex items-start gap-x-3") {
@@ -76,8 +76,10 @@ class IndexAction @Inject private constructor(
                     feature.config?.rules?.forEachIndexed { index, rule ->
                       p("rounded-md mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset text-gray-600 bg-gray-50 ring-gray-500/10") {
                         val type = feature.config.getFeatureClazz()
-                        val indexPrefix = if (feature.config.rules.size > 1) "${index + 1} - " else ""
-                        val evaluatedValue = feature.config.evaluate(type, feature.name, Attributes())
+                        val indexPrefix =
+                          if (feature.config.rules.size > 1) "${index + 1} - " else ""
+                        val evaluatedValue =
+                          feature.config.evaluate(type, feature.name, Attributes())
                         +"$indexPrefix$evaluatedValue"
                       }
                     }
@@ -87,13 +89,19 @@ class IndexAction @Inject private constructor(
                       +"""Modified """
                       time {
                         val instant = feature.updated_at ?: Instant.EPOCH
-                        val agoDuration = (Instant.now().epochSecond - instant.epochSecond).toDuration(DurationUnit.SECONDS)
+                        val agoDuration =
+                          (Instant.now().epochSecond - instant.epochSecond).toDuration(
+                            DurationUnit.SECONDS
+                          )
                         val truncatedAgoDuration = if (agoDuration.inWholeHours > 24) {
-                          "${agoDuration.inWholeDays} days"
+                          val value = agoDuration.inWholeDays
+                          if (value > 1) "$value days" else "$value day"
                         } else if (agoDuration.inWholeMinutes > 60) {
-                          "${agoDuration.inWholeHours} hours"
+                          val value = agoDuration.inWholeHours
+                          if (value > 1) "$value hours" else "$value hour"
                         } else if (agoDuration.inWholeSeconds > 60) {
-                          "${agoDuration.inWholeMinutes} mins"
+                          val value = agoDuration.inWholeMinutes
+                          if (value > 1) "$value mins" else "$value min"
                         } else {
                           agoDuration
                         }
@@ -125,6 +133,7 @@ class IndexAction @Inject private constructor(
                 div("flex flex-none items-center gap-x-4") {
                   a(classes = "rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block") {
                     href = PathBuilder(path = InlineEditAction.PATH, query = feature.name).build()
+                    attributes["data-turbo"] = "true"
                     +"""Edit"""
                   }
                   div("relative flex-none") {
@@ -144,22 +153,22 @@ class IndexAction @Inject private constructor(
                         )
                       }
                     }
-            //              +"""<!--
-            //          Dropdown menu, show/hide based on menu state.
-            //
-            //          Entering: "transition ease-out duration-100"
-            //            From: "transform opacity-0 scale-95"
-            //            To: "transform opacity-100 scale-100"
-            //          Leaving: "transition ease-in duration-75"
-            //            From: "transform opacity-100 scale-100"
-            //            To: "transform opacity-0 scale-95"
-            //        -->"""
+                    //              +"""<!--
+                    //          Dropdown menu, show/hide based on menu state.
+                    //
+                    //          Entering: "transition ease-out duration-100"
+                    //            From: "transform opacity-0 scale-95"
+                    //            To: "transform opacity-100 scale-100"
+                    //          Leaving: "transition ease-in duration-75"
+                    //            From: "transform opacity-100 scale-100"
+                    //            To: "transform opacity-0 scale-95"
+                    //        -->"""
                     div("hidden absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none") {
                       role = "menu"
                       attributes["aria-orientation"] = "vertical"
                       attributes["aria-labelledby"] = "options-menu-0-button"
                       attributes["tabindex"] = "-1"
-            //                  +"""<!-- Active: "bg-gray-50", Not Active: "" -->"""
+                      //                  +"""<!-- Active: "bg-gray-50", Not Active: "" -->"""
                       a(classes = "block px-3 py-1 text-sm leading-6 text-gray-900") {
                         href = "#"
                         role = "menuitem"
@@ -184,5 +193,6 @@ class IndexAction @Inject private constructor(
           }
         }
       }
+
     }
 }

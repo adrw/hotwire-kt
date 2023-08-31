@@ -22,11 +22,11 @@ data class PathBuilder(
     val normalizedPath = path?.removePrefix("/")?.removeSuffix("/")
 
 //    if (public) append(TAB_PATH_BASE_URL) else append(UI_FRAME_BASE_URL)
-    if (normalizedPath?.isNotBlank() == true) {
       append("/$normalizedPath/")
-    } else if (!public && frame != null) {
-      append("/$frame/")
-    }
+//    if (normalizedPath?.isNotBlank() == true) {
+//    } else if (!public && frame != null) {
+//      append("/$frame/")
+//    }
 
     if (!this.contains("?") && this.last() != '&') append("?")
     frame?.let { append("$FrameParam=$frame&") }
