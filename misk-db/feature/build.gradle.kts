@@ -1,5 +1,3 @@
-import hotwire_kt.Dependencies
-
 plugins {
   `java-library`
   id("app.cash.sqldelight")
@@ -8,20 +6,20 @@ plugins {
 
 dependencies {
   // Basic Misk libraries
-  api(Dependencies.miskActions)
-  api(Dependencies.miskAdmin)
-  api(Dependencies.miskFeature)
-  api(Dependencies.miskInject)
-  api(Dependencies.wispDeployment)
-  api(Dependencies.wispLogging)
-  api(Dependencies.wispMoshi)
-  implementation(Dependencies.miskCore)
-  implementation(Dependencies.miskService)
+  api(libs.miskActions)
+  api(libs.miskAdmin)
+  api(libs.miskFeature)
+  api(libs.miskInject)
+  api(libs.wispDeployment)
+  api(libs.wispLogging)
+  api(libs.wispMoshi)
+  implementation(libs.miskCore)
+  implementation(libs.miskService)
 
   // Database
-  implementation(Dependencies.miskJdbc)
-  implementation(Dependencies.sqldelightJdbc)
-  implementation(Dependencies.sqldelightJdbcDriver)
+  implementation(libs.miskJdbc)
+  implementation(libs.sqldelightJdbc)
+  implementation(libs.sqldelightJdbcDriver)
 
   // ui
   api(projects.hotwireKt.kotlinxHtmlTemplates)
@@ -30,14 +28,14 @@ dependencies {
   // testing
   testImplementation(projects.miskDb.featureSample)
 
-  testImplementation(Dependencies.junitApi)
-  testImplementation(Dependencies.kotlinTest)
-  testImplementation(Dependencies.misk)
-  testImplementation(Dependencies.miskAdmin)
-  testImplementation(testFixtures(Dependencies.miskJdbc))
-  testImplementation(Dependencies.miskTesting)
+  testImplementation(libs.junitApi)
+  testImplementation(libs.kotlinTest)
+  testImplementation(libs.misk)
+  testImplementation(libs.miskAdmin)
+  testImplementation(testFixtures(libs.miskJdbc))
+  testImplementation(libs.miskTesting)
 
-  testRuntimeOnly(Dependencies.junitEngine)
+  testRuntimeOnly(libs.junitEngine)
 }
 
 sourceSets {
@@ -74,9 +72,9 @@ wire {
 sqldelight {
   databases {
     create("FeatureDatabase") {
-      dialect(Dependencies.sqldelightMysqlDialect)
+      dialect(libs.sqldelightMysqlDialect)
       packageName.set("misk.db")
-      sourceFolders.set(listOf("sqldelight", "sqldelight-migrations"))
+      srcDirs(listOf("src/main/sqldelight", "src/main/sqldelight-migrations"))
       deriveSchemaFromMigrations.set(true)
     }
   }

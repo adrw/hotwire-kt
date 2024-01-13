@@ -43,13 +43,13 @@ class FlagpolePersistenceModule(
         return connection
       }
 
-      override fun notifyListeners(queryKeys: Array<String>) {
+      override fun notifyListeners(vararg queryKeys: String) {
       }
 
-      override fun removeListener(listener: Query.Listener, queryKeys: Array<String>) {
+      override fun removeListener(vararg queryKeys: String, listener: Query.Listener) {
       }
 
-      override fun addListener(listener: Query.Listener, queryKeys: Array<String>) {
+      override fun addListener(vararg queryKeys: String, listener: Query.Listener) {
       }
 
       override fun closeConnection(connection: Connection) {

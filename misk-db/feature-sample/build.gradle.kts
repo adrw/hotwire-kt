@@ -1,5 +1,3 @@
-import hotwire_kt.Dependencies
-
 plugins {
   id("app.cash.sqldelight")
   id("com.squareup.wire")
@@ -15,18 +13,18 @@ application {
 dependencies {
   implementation(projects.miskDb.feature)
 
-  implementation(Dependencies.logbackClassic)
-  implementation(Dependencies.misk)
-  implementation(Dependencies.miskAdmin)
-  implementation(Dependencies.miskCore)
-  implementation(Dependencies.miskFeature)
-  implementation(Dependencies.miskInject)
-  implementation(Dependencies.wispConfig)
+  implementation(libs.logbackClassic)
+  implementation(libs.misk)
+  implementation(libs.miskAdmin)
+  implementation(libs.miskCore)
+  implementation(libs.miskFeature)
+  implementation(libs.miskInject)
+  implementation(libs.wispConfig)
 
   // Database
-  implementation(Dependencies.miskJdbc)
-  implementation(Dependencies.sqldelightJdbc)
-  implementation(Dependencies.sqldelightJdbcDriver)
+  implementation(libs.miskJdbc)
+  implementation(libs.sqldelightJdbc)
+  implementation(libs.sqldelightJdbcDriver)
 }
 
 wire {
@@ -50,9 +48,9 @@ wire {
 sqldelight {
   databases {
     create("FlagpoleDatabase") {
-      dialect(Dependencies.sqldelightMysqlDialect)
+      dialect(libs.sqldelightMysqlDialect)
       packageName.set("misk.db.flagpole.db")
-      sourceFolders.set(listOf("sqldelight", "resources/db-migrations"))
+      srcDirs(listOf("src/main/sqldelight", "src/main/resources/db-migrations"))
       deriveSchemaFromMigrations.set(true)
       migrationOutputDirectory.set(file("$buildDir/resources/main/db-migrations"))
     }
