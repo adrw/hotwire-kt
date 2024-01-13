@@ -15,12 +15,12 @@ buildscript {
   }
 
   dependencies {
-    classpath(hotwire_kt.Dependencies.kotlinAllOpenPlugin)
-    classpath(hotwire_kt.Dependencies.kotlinGradlePlugin)
-    classpath(hotwire_kt.Dependencies.junitGradlePlugin)
-    classpath(hotwire_kt.Dependencies.shadowJarPlugin)
-    classpath(hotwire_kt.Dependencies.sqldelightGradle)
-    classpath(hotwire_kt.Dependencies.wireGradlePlugin)
+    classpath(libs.kotlinAllOpenPlugin)
+    classpath(libs.kotlinGradlePlugin)
+    classpath(libs.junitGradlePlugin)
+    classpath(libs.shadowJarPlugin)
+    classpath(libs.sqldelightGradle)
+    classpath(libs.wireGradlePlugin)
   }
 }
 

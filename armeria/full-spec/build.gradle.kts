@@ -1,6 +1,4 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import hotwire_kt.Dependencies
-
 plugins {
   id("org.jetbrains.kotlin.jvm")
   id("com.github.johnrengelman.shadow")
@@ -19,12 +17,12 @@ dependencies {
   implementation(projects.hotwireKt.kotlinxHtmlTemplates)
   implementation(projects.hotwireKt.tailwindsUi)
 
-  implementation(Dependencies.mustacheCompiler)
-  implementation(Dependencies.kotlinxHtml)
-  implementation(Dependencies.okio)
-  implementation(Dependencies.wispLogging)
+  implementation(libs.mustacheCompiler)
+  implementation(libs.kotlinxHtml)
+  implementation(libs.okio)
+  implementation(libs.wispLogging)
 
-  implementation(platform(Dependencies.armeriaBom))
+  implementation(platform(libs.armeriaBom))
   implementation("com.linecorp.armeria:armeria-grpc")
 }
 

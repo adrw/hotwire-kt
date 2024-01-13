@@ -22,7 +22,7 @@ private const val SERVICE_NAME = "flagpole"
 
 fun main(args: Array<String>) {
   val deployment = DEVELOPMENT
-//  FlagpoleLogging.configure()
+  FlagpoleLogging.configure()
   val config = MiskConfig.load<FlagpoleConfig>(SERVICE_NAME, deployment)
   MiskApplication(
     MiskRealServiceModule(),
